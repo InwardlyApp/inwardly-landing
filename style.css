@@ -103,6 +103,13 @@ a {
   justify-content: center;
 }
 
+.nav-icon-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
 .nav-wordmark {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 20px;
@@ -279,6 +286,13 @@ a {
   height: 24px;
   background: linear-gradient(135deg, var(--indigo), #6B5A9E);
   border-radius: 6px;
+}
+
+.mock-icon-img {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  object-fit: cover;
 }
 
 .mock-wordmark {
