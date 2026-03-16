@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inwardly - Your thoughts, understood.</title>
-  <meta name="description" content="A private, AI-powered journaling app that helps you understand your thoughts. Reflect daily, discover patterns, grow intentionally.">
+  <meta name="description" content="A private, AI-powered journaling app that helps you understand your thoughts. Reflect daily, discover patterns, grow with clarity.">
   <meta name="theme-color" content="#5B4A8A">
 
   <!-- Open Graph -->
@@ -22,7 +22,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="app-icon.png">
@@ -37,6 +37,7 @@
       </a>
       <div class="nav-links">
         <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
         <a href="#privacy">Privacy</a>
         <a href="/privacy">Privacy Policy</a>
       </div>
@@ -64,34 +65,134 @@
       </div>
     </div>
 
-    <!-- Phone mockup -->
+    <!-- Phone mockup carousel -->
     <div class="hero-phone">
       <div class="phone-frame">
-        <div class="phone-screen">
-          <div class="mock-header">
-            <img src="app-icon.png" alt="" class="mock-icon-img">
-            <span class="mock-wordmark">inwardly</span>
-          </div>
-          <div class="mock-greeting">Good morning</div>
-          <div class="mock-stat-row">
-            <div class="mock-stat">
-              <div class="mock-stat-num">12</div>
-              <div class="mock-stat-label">day streak</div>
+        <!-- Notch -->
+        <div class="phone-notch"></div>
+
+        <!-- Screen carousel -->
+        <div class="phone-carousel" id="phoneCarousel">
+
+          <!-- Screen 1: Home -->
+          <div class="phone-screen screen-home active">
+            <div class="mock-header">
+              <img src="app-icon.png" alt="" class="mock-icon-img">
+              <span class="mock-wordmark">inwardly</span>
             </div>
-            <div class="mock-stat">
-              <div class="mock-stat-num">47</div>
-              <div class="mock-stat-label">entries</div>
+            <div class="mock-greeting">Good evening, Alex</div>
+            <div class="mock-stat-row">
+              <div class="mock-stat">
+                <div class="mock-stat-num">12</div>
+                <div class="mock-stat-label">day streak</div>
+              </div>
+              <div class="mock-stat">
+                <div class="mock-stat-num">47</div>
+                <div class="mock-stat-label">entries</div>
+              </div>
+              <div class="mock-stat">
+                <div class="mock-stat-num">4.2</div>
+                <div class="mock-stat-label">avg mood</div>
+              </div>
+            </div>
+            <div class="mock-prompt-card">
+              <div class="mock-prompt-label">TODAY'S PROMPT</div>
+              <div class="mock-prompt-text">"What small moment brought you joy today?"</div>
+            </div>
+            <div class="mock-entry-card">
+              <div class="mock-entry-top">
+                <div class="mock-entry-date">Mar 14</div>
+                <div class="mock-entry-mood">&#x1F60A;</div>
+              </div>
+              <div class="mock-entry-preview">Had a wonderful morning walk. The cherry blossoms are finally out and the light was...</div>
             </div>
           </div>
-          <div class="mock-prompt-card">
-            <div class="mock-prompt-label">TODAY'S PROMPT</div>
-            <div class="mock-prompt-text">What small moment brought you joy today?</div>
+
+          <!-- Screen 2: Journal entry -->
+          <div class="phone-screen screen-entry">
+            <div class="mock-entry-header">
+              <div class="mock-back-btn">
+                <svg width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1L1 7l6 6"/></svg>
+              </div>
+              <div class="mock-entry-title">New Entry</div>
+              <div class="mock-save-btn">Save</div>
+            </div>
+            <div class="mock-write-meta">
+              <span class="mock-write-date">Tuesday, March 16</span>
+              <div class="mock-mood-row">
+                <span class="mock-mood-dot" style="background:#C084FC;"></span>
+                <span class="mock-mood-dot" style="background:#818CF8;"></span>
+                <span class="mock-mood-dot selected" style="background:#4ADE80;"></span>
+                <span class="mock-mood-dot" style="background:#FBBF24;"></span>
+                <span class="mock-mood-dot" style="background:#FB923C;"></span>
+              </div>
+            </div>
+            <div class="mock-write-area">
+              <div class="mock-write-cursor">Went for a long run this morning — first time in weeks. Something clicked. I felt like myself again, like the fog had lifted just slightly. I need to remember this feeling when I&rsquo;m avoiding it<span class="mock-cursor">|</span></div>
+            </div>
+            <div class="mock-toolbar">
+              <div class="mock-tool-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              </div>
+              <div class="mock-tool-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="mock-tool-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+            </div>
           </div>
-          <div class="mock-entry-card">
-            <div class="mock-entry-date">14</div>
-            <div class="mock-entry-preview">Had a wonderful morning walk through the park. The cherry blossoms are...</div>
+
+          <!-- Screen 3: AI Insights -->
+          <div class="phone-screen screen-insights">
+            <div class="mock-insights-header">
+              <div class="mock-insights-title">Your Insights</div>
+              <div class="mock-claude-badge">Claude AI</div>
+            </div>
+            <div class="mock-insight-card featured">
+              <div class="mock-insight-icon">&#x2728;</div>
+              <div class="mock-insight-body">
+                <div class="mock-insight-label">PATTERN DETECTED</div>
+                <div class="mock-insight-text">Your mood is notably higher on days you mention exercise or being outdoors.</div>
+              </div>
+            </div>
+            <div class="mock-insight-card">
+              <div class="mock-insight-icon">&#x1F4C5;</div>
+              <div class="mock-insight-body">
+                <div class="mock-insight-label">THIS WEEK</div>
+                <div class="mock-insight-text">5 entries. You wrote about connection 3 times — something worth exploring.</div>
+              </div>
+            </div>
+            <div class="mock-mood-chart">
+              <div class="mock-chart-label">Mood — last 7 days</div>
+              <div class="mock-chart-bars">
+                <div class="mock-bar" style="height: 40%;"></div>
+                <div class="mock-bar" style="height: 60%;"></div>
+                <div class="mock-bar" style="height: 45%;"></div>
+                <div class="mock-bar" style="height: 70%;"></div>
+                <div class="mock-bar" style="height: 55%;"></div>
+                <div class="mock-bar" style="height: 85%;"></div>
+                <div class="mock-bar active" style="height: 90%;"></div>
+              </div>
+              <div class="mock-chart-days">
+                <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+              </div>
+            </div>
           </div>
-        </div>
+
+        </div><!-- /phone-carousel -->
+      </div><!-- /phone-frame -->
+
+      <!-- Carousel dots -->
+      <div class="carousel-dots">
+        <button class="carousel-dot active" data-index="0" aria-label="Home screen"></button>
+        <button class="carousel-dot" data-index="1" aria-label="Journal entry screen"></button>
+        <button class="carousel-dot" data-index="2" aria-label="AI insights screen"></button>
+      </div>
+      <div class="carousel-labels">
+        <span class="carousel-label active" data-index="0">Home</span>
+        <span class="carousel-label" data-index="1">Write</span>
+        <span class="carousel-label" data-index="2">Insights</span>
       </div>
     </div>
   </section>
@@ -99,8 +200,8 @@
   <!-- Features -->
   <section class="features" id="features">
     <div class="section-inner">
-      <p class="section-label">Features</p>
-      <h2 class="section-title">Everything you need to<br>reflect & grow</h2>
+      <p class="section-label">What Inwardly does</p>
+      <h2 class="section-title">Built for the person who wants<br>to understand themselves</h2>
 
       <div class="feature-grid">
         <div class="feature-card">
@@ -110,8 +211,8 @@
               <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
             </svg>
           </div>
-          <h3 class="feature-title">Daily Journaling</h3>
-          <p class="feature-desc">Write freely with AI-generated prompts that adapt to your mood and patterns. Track location, photos, and emotions.</p>
+          <h3 class="feature-title">Capture Every Moment</h3>
+          <p class="feature-desc">Write freely with AI-generated prompts that adapt to your mood and history. Add photos, location, and a daily mood check-in to build a richer picture of your life.</p>
         </div>
 
         <div class="feature-card">
@@ -120,8 +221,9 @@
               <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
             </svg>
           </div>
-          <h3 class="feature-title">AI Insights</h3>
-          <p class="feature-desc">Discover emotional patterns and receive thoughtful weekly reviews powered by Claude AI. Your personal reflection partner.</p>
+          <h3 class="feature-title">Understand Your Patterns</h3>
+          <p class="feature-desc">Claude AI reads across your entries to surface what you can't see yourself — recurring emotions, what lifts your mood, what drains it. Your personal reflection partner, powered by AI.</p>
+          <span class="feature-badge">Claude AI</span>
         </div>
 
         <div class="feature-card">
@@ -133,8 +235,8 @@
               <line x1="3" y1="10" x2="21" y2="10"/>
             </svg>
           </div>
-          <h3 class="feature-title">Streaks & Stats</h3>
-          <p class="feature-desc">Build a writing habit with daily streaks, word counts, and monthly emotional trend reports. Watch your consistency grow.</p>
+          <h3 class="feature-title">Build Lasting Habits</h3>
+          <p class="feature-desc">Daily streaks, word counts, and monthly emotional trend reports keep you consistent and motivated. Watch small daily habits compound into real self-knowledge.</p>
         </div>
 
         <div class="feature-card">
@@ -143,8 +245,8 @@
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             </svg>
           </div>
-          <h3 class="feature-title">Privacy First</h3>
-          <p class="feature-desc">AES-256 encryption, no data selling, no ads. Your journal is yours alone. Encryption keys live on your device.</p>
+          <h3 class="feature-title">Your Words, Protected</h3>
+          <p class="feature-desc">AES-256 encryption before anything leaves your device. No ads, no data selling, no AI training on your entries. Your encryption keys live on your phone — not our servers.</p>
         </div>
 
         <div class="feature-card">
@@ -154,8 +256,8 @@
               <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
             </svg>
           </div>
-          <h3 class="feature-title">Multiple Journals</h3>
-          <p class="feature-desc">Organize your life with separate journals for work, personal, travel, and more. Keep everything in its place.</p>
+          <h3 class="feature-title">Organize Your Life</h3>
+          <p class="feature-desc">Keep a separate journal for work reflections, personal growth, travel, or anything else. Everything in its place, so nothing bleeds together.</p>
         </div>
 
         <div class="feature-card">
@@ -167,8 +269,8 @@
               <line x1="16" y1="17" x2="8" y2="17"/>
             </svg>
           </div>
-          <h3 class="feature-title">Templates</h3>
-          <p class="feature-desc">Start with structured templates for workouts, productivity, collections, and more. Or create your own custom templates.</p>
+          <h3 class="feature-title">Start Inspired, Every Time</h3>
+          <p class="feature-desc">Choose from six structured templates — workouts, gratitude, weekly reviews, and more — or build your own. Never stare at a blank page again.</p>
         </div>
       </div>
     </div>
@@ -195,7 +297,151 @@
           <span class="badge">No Ads</span>
           <span class="badge">No Data Sales</span>
           <span class="badge">On-device Keys</span>
+          <span class="badge">Data Export Anytime</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing-section" id="pricing">
+    <div class="section-inner">
+      <p class="section-label">Simple pricing</p>
+      <h2 class="section-title">Free to start.<br>Unlock the full picture.</h2>
+      <p class="pricing-subtitle">The free tier gives you a private journaling home. Premium adds the AI layer that makes Inwardly genuinely different.</p>
+
+      <div class="pricing-grid">
+
+        <!-- Free card -->
+        <div class="pricing-card">
+          <div class="pricing-card-header">
+            <h3 class="pricing-tier">Free</h3>
+            <div class="pricing-price">
+              <span class="pricing-amount">$0</span>
+            </div>
+            <p class="pricing-tagline">A private place to write. Always free.</p>
+          </div>
+          <ul class="pricing-features">
+            <li class="pricing-feature">
+              <span class="pf-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>3 journal entries per week</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pf-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>Daily writing prompts</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pf-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>Mood check-in</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pf-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>7-day streak tracking</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pf-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>1 journal</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pf-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>AES-256 encryption</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pf-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>Data export</span>
+            </li>
+          </ul>
+          <a href="#" class="btn btn-secondary pricing-btn">Get Started Free</a>
+        </div>
+
+        <!-- Premium card -->
+        <div class="pricing-card pricing-card-premium">
+          <div class="pricing-popular-badge">Most Popular</div>
+          <div class="pricing-card-header">
+            <h3 class="pricing-tier">Premium</h3>
+            <div class="pricing-price">
+              <span class="pricing-amount">$4.99</span>
+              <span class="pricing-period">/ month</span>
+            </div>
+            <div class="pricing-annual-note">
+              or <strong>$39.99/year</strong> — save 33%
+            </div>
+            <p class="pricing-tagline">The full picture. Powered by Claude AI.</p>
+          </div>
+          <ul class="pricing-features">
+            <li class="pricing-feature">
+              <span class="pf-check pf-check-gold">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span><strong>Unlimited</strong> journal entries</span>
+            </li>
+            <li class="pricing-feature pricing-feature-ai">
+              <span class="pf-check pf-check-gold">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>AI-powered weekly reviews <span class="pf-ai-tag">Claude AI</span></span>
+            </li>
+            <li class="pricing-feature pricing-feature-ai">
+              <span class="pf-check pf-check-gold">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>Pattern &amp; emotion detection <span class="pf-ai-tag">Claude AI</span></span>
+            </li>
+            <li class="pricing-feature pricing-feature-ai">
+              <span class="pf-check pf-check-gold">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>Monthly reflection reports <span class="pf-ai-tag">Claude AI</span></span>
+            </li>
+            <li class="pricing-feature pricing-feature-ai">
+              <span class="pf-check pf-check-gold">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>Personalized daily prompts <span class="pf-ai-tag">Claude AI</span></span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pf-check pf-check-gold">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>Mood trend graphs &amp; analytics</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pf-check pf-check-gold">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>Photo attachments</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pf-check pf-check-gold">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>Unlimited journals</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pf-check pf-check-gold">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>Custom entry templates</span>
+            </li>
+          </ul>
+          <a href="#" class="btn btn-primary pricing-btn">Start 7-Day Free Trial</a>
+          <p class="pricing-trial-note">No payment required to try</p>
+        </div>
+
       </div>
     </div>
   </section>
@@ -230,5 +476,56 @@
       <p class="footer-copy">&copy; 2026 Inwardly. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    // Phone screen carousel
+    (function() {
+      var screens = document.querySelectorAll('.phone-screen');
+      var dots = document.querySelectorAll('.carousel-dot');
+      var labels = document.querySelectorAll('.carousel-label');
+      var current = 0;
+      var timer;
+
+      function goTo(index) {
+        screens[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        labels[current].classList.remove('active');
+        current = index;
+        screens[current].classList.add('active');
+        dots[current].classList.add('active');
+        labels[current].classList.add('active');
+      }
+
+      function next() {
+        goTo((current + 1) % screens.length);
+      }
+
+      function startAuto() {
+        timer = setInterval(next, 3200);
+      }
+
+      function stopAuto() {
+        clearInterval(timer);
+      }
+
+      dots.forEach(function(dot) {
+        dot.addEventListener('click', function() {
+          stopAuto();
+          goTo(parseInt(dot.dataset.index, 10));
+          startAuto();
+        });
+      });
+
+      labels.forEach(function(label) {
+        label.addEventListener('click', function() {
+          stopAuto();
+          goTo(parseInt(label.dataset.index, 10));
+          startAuto();
+        });
+      });
+
+      startAuto();
+    })();
+  </script>
 </body>
 </html>
