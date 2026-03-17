@@ -335,338 +335,496 @@ a {
 .mock-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 7px;
+  margin-bottom: 10px;
 }
 
 .mock-icon-img {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 5px;
   object-fit: cover;
 }
 
 .mock-wordmark {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--indigo);
-}
-
-.mock-greeting {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 14px;
-}
-
-.mock-stat-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.mock-stat {
-  background: var(--surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  padding: 10px 8px;
-  flex: 1;
-  text-align: center;
-}
-
-.mock-stat-num {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--indigo);
-}
-
-.mock-stat-label {
-  font-size: 9px;
-  color: var(--text-tertiary);
-  font-weight: 600;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-  margin-top: 2px;
-}
-
-.mock-prompt-card {
-  background: var(--surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 14px;
-  padding: 12px 14px;
-  margin-bottom: 12px;
-  border-left: 3px solid var(--gold);
-}
-
-.mock-prompt-label {
-  font-size: 8px;
-  font-weight: 700;
-  color: var(--gold);
-  letter-spacing: 1px;
-  margin-bottom: 5px;
-}
-
-.mock-prompt-text {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  font-style: italic;
-}
-
-.mock-entry-card {
-  background: var(--surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  padding: 12px 14px;
-}
-
-.mock-entry-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
-}
-
-.mock-entry-date {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.mock-entry-mood {
   font-size: 14px;
-}
-
-.mock-entry-preview {
-  font-size: 11px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-/* ---- Screen 2: Journal entry ---- */
-
-.mock-entry-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  padding: 0 2px;
-}
-
-.mock-back-btn {
-  color: var(--indigo);
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mock-entry-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.mock-save-btn {
-  font-size: 13px;
   font-weight: 600;
   color: var(--indigo);
 }
 
-.mock-write-meta {
-  margin-bottom: 12px;
-}
-
-.mock-write-date {
-  font-size: 11px;
-  color: var(--text-tertiary);
-  font-weight: 500;
-  display: block;
-  margin-bottom: 8px;
-}
-
-.mock-mood-row {
-  display: flex;
-  gap: 6px;
-}
-
-.mock-mood-dot {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  opacity: 0.4;
-  border: 2px solid transparent;
-}
-
-.mock-mood-dot.selected {
-  opacity: 1;
-  border-color: rgba(0,0,0,0.15);
-  transform: scale(1.15);
-}
-
-.mock-write-area {
-  background: var(--surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  padding: 14px;
-  margin-bottom: 12px;
-  min-height: 140px;
-}
-
-.mock-write-cursor {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  font-family: Georgia, serif;
-}
-
-.mock-cursor {
-  display: inline-block;
-  width: 1.5px;
-  height: 14px;
-  background: var(--indigo);
-  margin-left: 1px;
-  vertical-align: text-bottom;
-  animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-.mock-toolbar {
-  display: flex;
-  gap: 8px;
-}
-
-.mock-tool-btn {
-  width: 32px;
-  height: 32px;
-  background: var(--surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-tertiary);
-}
-
-/* ---- Screen 3: AI Insights ---- */
-
-.mock-insights-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
-
-.mock-insights-title {
+/* Greeting: large Playfair bold */
+.mock-greeting {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 18px;
   font-weight: 700;
   color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 2px;
 }
 
-.mock-claude-badge {
+/* Date below greeting: small gray */
+.mock-date-sub {
   font-size: 9px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+/* Single stats card with divider */
+.mock-stats-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.mock-stats-left,
+.mock-stats-right {
+  flex: 1;
+  text-align: center;
+}
+
+.mock-stats-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border-subtle);
+  margin: 0 10px;
+}
+
+.mock-stats-num {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.mock-stats-label {
+  font-size: 8px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  text-transform: lowercase;
+  margin-top: 1px;
+}
+
+/* Section row: label + personalized pill */
+.mock-section-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.mock-section-label {
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+/* "PERSONALIZED" pill next to section header */
+.mock-personalized-pill {
+  font-size: 7px;
   font-weight: 700;
   color: var(--gold);
   background: var(--gold-pale);
   border: 1px solid rgba(212, 168, 84, 0.25);
   border-radius: 100px;
-  padding: 3px 8px;
-  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  letter-spacing: 0.4px;
 }
 
-.mock-insight-card {
+/* Prompt card: gold left border + italic serif text */
+.mock-prompt-card {
   background: var(--surface);
   border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  padding: 12px 14px;
-  margin-bottom: 10px;
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
+  border-radius: 10px;
+  padding: 9px 10px;
+  margin-bottom: 8px;
+  border-left: 3px solid var(--gold);
 }
 
-.mock-insight-card.featured {
-  border-color: rgba(212, 168, 84, 0.3);
-  background: linear-gradient(135deg, rgba(212, 168, 84, 0.05), var(--surface));
-}
-
-.mock-insight-icon {
-  font-size: 16px;
-  line-height: 1;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.mock-insight-label {
-  font-size: 8px;
+.mock-prompt-label {
+  font-size: 7px;
   font-weight: 700;
   color: var(--gold);
   letter-spacing: 0.8px;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
-.mock-insight-text {
-  font-size: 11px;
+.mock-prompt-text {
+  font-size: 10.5px;
   color: var(--text-secondary);
   line-height: 1.5;
+  font-style: italic;
+  font-family: Georgia, serif;
 }
 
+/* Purple gradient CTA button */
+.mock-cta-btn {
+  background: linear-gradient(135deg, var(--indigo), #6B5A9E);
+  border-radius: 10px;
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.mock-cta-icon {
+  font-size: 10px;
+  color: rgba(255,255,255,0.9);
+}
+
+.mock-cta-text {
+  font-size: 10px;
+  font-weight: 600;
+  color: #FFFFFF;
+  letter-spacing: 0.1px;
+}
+
+/* This Month entry rows */
+.mock-month-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.mock-month-entry:last-child {
+  border-bottom: none;
+}
+
+.mock-month-date {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  flex-shrink: 0;
+  width: 30px;
+}
+
+.mock-month-preview {
+  font-size: 9.5px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- Screen 2: Write entry ---- */
+
+/* Native modal header: Cancel | date | Save pill */
+.mock-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 0 1px;
+}
+
+.mock-cancel-btn {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--indigo);
+}
+
+.mock-modal-date {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Purple pill Save button */
+.mock-save-pill {
+  font-size: 10px;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, var(--indigo), #6B5A9E);
+  border-radius: 100px;
+  padding: 3px 10px;
+}
+
+/* Write area: placeholder version (not in-progress text) */
+.mock-write-area {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 10px 10px;
+  margin-bottom: 8px;
+  min-height: 52px;
+}
+
+.mock-write-placeholder {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-family: Georgia, serif;
+  font-style: italic;
+}
+
+/* Toolbar: word count + pill buttons */
+.mock-toolbar-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.mock-word-count {
+  font-size: 8.5px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.mock-pills-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.mock-pill {
+  font-size: 8px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px;
+  padding: 2px 7px;
+}
+
+.mock-pill-active {
+  background: rgba(91, 74, 138, 0.1);
+  color: var(--indigo);
+  border-color: rgba(91, 74, 138, 0.2);
+}
+
+/* Mood section */
+.mock-mood-section-label {
+  font-size: 7.5px;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.mock-mood-buttons-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 5px;
+}
+
+.mock-mood-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: var(--elevated);
+  border-radius: 8px;
+  padding: 5px 2px;
+  border: 1px solid transparent;
+}
+
+.mock-mood-btn-selected {
+  background: rgba(91, 74, 138, 0.08);
+  border-color: rgba(91, 74, 138, 0.2);
+}
+
+.mock-mood-emoji {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.mock-mood-name {
+  font-size: 7px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+}
+
+.mock-mood-hint {
+  font-size: 7.5px;
+  color: var(--text-tertiary);
+  text-align: center;
+  font-style: italic;
+  line-height: 1.3;
+}
+
+/* ---- Screen 3: Insights ---- */
+
+/* Large Playfair title — no secondary header element */
+.mock-insights-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+/* Mood chart card */
 .mock-mood-chart {
   background: var(--surface);
   border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  padding: 12px 14px;
+  border-radius: 10px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
 }
 
-.mock-chart-label {
-  font-size: 9px;
-  font-weight: 600;
+.mock-chart-header {
+  font-size: 7.5px;
+  font-weight: 700;
   color: var(--text-tertiary);
-  letter-spacing: 0.5px;
-  margin-bottom: 10px;
+  letter-spacing: 0.7px;
   text-transform: uppercase;
-}
-
-.mock-chart-bars {
-  display: flex;
-  align-items: flex-end;
-  gap: 5px;
-  height: 44px;
   margin-bottom: 6px;
 }
 
-.mock-bar {
-  flex: 1;
-  background: var(--elevated);
-  border-radius: 3px 3px 0 0;
-}
-
-.mock-bar.active {
-  background: linear-gradient(180deg, var(--gold-light), var(--gold));
-}
-
-.mock-chart-days {
+/* Bar chart: 3-row CSS grid per column — emoji / bar (grows) / day label
+   Each column = 1 cell wide. Emoji row is fixed, bar row fills space, day row is fixed. */
+.mock-chart-bars {
   display: flex;
-  gap: 5px;
+  gap: 3px;
+  height: 58px; /* total chart area height */
+  align-items: stretch;
+  margin-bottom: 0;
 }
 
-.mock-chart-days span {
+.mock-bar-wrap {
+  flex: 1;
+  display: grid;
+  grid-template-rows: 10px 1fr 10px; /* emoji | bar | day */
+  align-items: end;
+  gap: 1px;
+}
+
+.mock-bar-emoji {
+  font-size: 7px;
+  line-height: 1;
+  text-align: center;
+  align-self: center;
+}
+
+.mock-bar {
+  width: 100%;
+  border-radius: 2px 2px 0 0;
+  min-height: 4px;
+  /* height set inline in px — bar sits within its grid cell which is 1fr,
+     so align-self:end makes it grow from the bottom */
+  align-self: end;
+}
+
+/* Mood-colored bars matching brand mood scale */
+.mock-bar-2 { background: #8A7EC2; }  /* meh — dusty purple */
+.mock-bar-3 { background: #7BA89C; }  /* okay — sage green */
+.mock-bar-4 { background: #C4A882; }  /* good — warm gold */
+.mock-bar-5 { background: #D4896A; }  /* great — coral-apricot */
+.mock-bar-today { background: linear-gradient(180deg, rgba(91,74,138,0.45), var(--indigo)); }
+
+.mock-bar-day {
+  font-size: 7px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-align: center;
+  align-self: center;
+}
+
+.mock-bar-day-today {
+  color: var(--indigo);
+  font-weight: 700;
+}
+
+/* This Week section */
+.mock-section-gold {
+  color: var(--gold) !important;
+}
+
+.mock-week-date-range {
+  font-size: 7.5px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.mock-week-review {
+  font-size: 9.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-family: Georgia, serif;
+  margin-bottom: 7px;
+}
+
+/* Pattern cards */
+.mock-pattern-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 7px 9px;
+  margin-bottom: 5px;
+}
+
+.mock-pattern-title {
+  font-size: 7.5px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.mock-pattern-text {
+  font-size: 9px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  font-family: Georgia, serif;
+}
+
+/* On-demand review section */
+.mock-segment-control {
+  display: flex;
+  background: var(--elevated);
+  border-radius: 8px;
+  padding: 2px;
+  margin-bottom: 6px;
+  gap: 2px;
+}
+
+.mock-segment-btn {
   flex: 1;
   text-align: center;
-  font-size: 9px;
-  color: var(--text-tertiary);
+  font-size: 8.5px;
   font-weight: 600;
+  color: var(--text-tertiary);
+  padding: 4px 4px;
+  border-radius: 6px;
+}
+
+.mock-segment-active {
+  background: var(--surface);
+  color: var(--indigo);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.mock-generate-btn {
+  background: linear-gradient(135deg, var(--indigo), #6B5A9E);
+  border-radius: 8px;
+  padding: 7px 10px;
+  text-align: center;
+  font-size: 9.5px;
+  font-weight: 600;
+  color: #FFFFFF;
 }
 
 /* ---- Carousel controls ---- */

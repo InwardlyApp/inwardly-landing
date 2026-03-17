@@ -76,108 +76,173 @@
 
           <!-- Screen 1: Home -->
           <div class="phone-screen screen-home active">
+            <!-- Branded header: icon + wordmark -->
             <div class="mock-header">
               <img src="app-icon.png" alt="" class="mock-icon-img">
               <span class="mock-wordmark">inwardly</span>
             </div>
-            <div class="mock-greeting">Good evening, Alex</div>
-            <div class="mock-stat-row">
-              <div class="mock-stat">
-                <div class="mock-stat-num">12</div>
-                <div class="mock-stat-label">day streak</div>
+            <!-- Greeting -->
+            <div class="mock-greeting">Good morning, Sarah.</div>
+            <div class="mock-date-sub">Tuesday, March 17</div>
+            <!-- Stats card: single card, two stats with divider -->
+            <div class="mock-stats-card">
+              <div class="mock-stats-left">
+                <div class="mock-stats-num">8 🔥</div>
+                <div class="mock-stats-label">day streak</div>
               </div>
-              <div class="mock-stat">
-                <div class="mock-stat-num">47</div>
-                <div class="mock-stat-label">entries</div>
+              <div class="mock-stats-divider"></div>
+              <div class="mock-stats-right">
+                <div class="mock-stats-num">23</div>
+                <div class="mock-stats-label">total entries</div>
               </div>
-              <div class="mock-stat">
-                <div class="mock-stat-num">4.2</div>
-                <div class="mock-stat-label">avg mood</div>
-              </div>
+            </div>
+            <!-- Prompt section -->
+            <div class="mock-section-row">
+              <div class="mock-section-label">TODAY'S PROMPT</div>
+              <div class="mock-personalized-pill">PERSONALIZED</div>
             </div>
             <div class="mock-prompt-card">
-              <div class="mock-prompt-label">TODAY'S PROMPT</div>
-              <div class="mock-prompt-text">"What small moment brought you joy today?"</div>
+              <div class="mock-prompt-label">PERSONALIZED</div>
+              <div class="mock-prompt-text">"What would it feel like to let go of one thing you've been holding onto?"</div>
             </div>
-            <div class="mock-entry-card">
-              <div class="mock-entry-top">
-                <div class="mock-entry-date">Mar 14</div>
-                <div class="mock-entry-mood">&#x1F60A;</div>
-              </div>
-              <div class="mock-entry-preview">Had a wonderful morning walk. The cherry blossoms are finally out and the light was...</div>
+            <!-- CTA button -->
+            <div class="mock-cta-btn">
+              <span class="mock-cta-icon">✏</span>
+              <span class="mock-cta-text">Write Today's Entry</span>
+            </div>
+            <!-- This Month section -->
+            <div class="mock-section-label" style="margin-top:10px;margin-bottom:5px;">THIS MONTH</div>
+            <div class="mock-month-entry">
+              <div class="mock-month-date">Mar 15</div>
+              <div class="mock-month-preview">Finally took that walk by the river...</div>
+            </div>
+            <div class="mock-month-entry">
+              <div class="mock-month-date">Mar 14</div>
+              <div class="mock-month-preview">The meeting went better than expected...</div>
             </div>
           </div>
 
-          <!-- Screen 2: Journal entry -->
+          <!-- Screen 2: Journal entry (Write) -->
           <div class="phone-screen screen-entry">
-            <div class="mock-entry-header">
-              <div class="mock-back-btn">
-                <svg width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1L1 7l6 6"/></svg>
-              </div>
-              <div class="mock-entry-title">New Entry</div>
-              <div class="mock-save-btn">Save</div>
+            <!-- Native modal header: Cancel | date | Save pill -->
+            <div class="mock-modal-header">
+              <div class="mock-cancel-btn">Cancel</div>
+              <div class="mock-modal-date">Mar 17</div>
+              <div class="mock-save-pill">Save</div>
             </div>
-            <div class="mock-write-meta">
-              <span class="mock-write-date">Tuesday, March 16</span>
-              <div class="mock-mood-row">
-                <span class="mock-mood-dot" style="background:#C084FC;"></span>
-                <span class="mock-mood-dot" style="background:#818CF8;"></span>
-                <span class="mock-mood-dot selected" style="background:#4ADE80;"></span>
-                <span class="mock-mood-dot" style="background:#FBBF24;"></span>
-                <span class="mock-mood-dot" style="background:#FB923C;"></span>
-              </div>
+            <!-- Personalized prompt above write area -->
+            <div class="mock-prompt-label" style="margin-bottom:4px;">PERSONALIZED</div>
+            <div class="mock-prompt-card" style="margin-bottom:10px;">
+              <div class="mock-prompt-text">"What would it feel like to let go of one thing you've been holding onto?"</div>
             </div>
+            <!-- Write area -->
             <div class="mock-write-area">
-              <div class="mock-write-cursor">Went for a long run this morning — first time in weeks. Something clicked. I felt like myself again, like the fog had lifted just slightly. I need to remember this feeling when I&rsquo;m avoiding it<span class="mock-cursor">|</span></div>
+              <div class="mock-write-placeholder">Begin writing...</div>
             </div>
-            <div class="mock-toolbar">
-              <div class="mock-tool-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-              </div>
-              <div class="mock-tool-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              </div>
-              <div class="mock-tool-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <!-- Bottom toolbar: word count + pills -->
+            <div class="mock-toolbar-row">
+              <span class="mock-word-count">0 words</span>
+              <div class="mock-pills-row">
+                <span class="mock-pill mock-pill-active">No journal</span>
+                <span class="mock-pill">Template</span>
+                <span class="mock-pill">Location</span>
+                <span class="mock-pill">Photo</span>
               </div>
             </div>
+            <!-- Mood section -->
+            <div class="mock-mood-section-label">HOW ARE YOU FEELING?</div>
+            <div class="mock-mood-buttons-row">
+              <div class="mock-mood-btn">
+                <span class="mock-mood-emoji">😔</span>
+                <span class="mock-mood-name">Low</span>
+              </div>
+              <div class="mock-mood-btn">
+                <span class="mock-mood-emoji">😕</span>
+                <span class="mock-mood-name">Meh</span>
+              </div>
+              <div class="mock-mood-btn mock-mood-btn-selected">
+                <span class="mock-mood-emoji">😐</span>
+                <span class="mock-mood-name">Okay</span>
+              </div>
+              <div class="mock-mood-btn">
+                <span class="mock-mood-emoji">🙂</span>
+                <span class="mock-mood-name">Good</span>
+              </div>
+              <div class="mock-mood-btn">
+                <span class="mock-mood-emoji">😊</span>
+                <span class="mock-mood-name">Great</span>
+              </div>
+            </div>
+            <div class="mock-mood-hint">Optional · tap to select, tap again to clear</div>
           </div>
 
-          <!-- Screen 3: AI Insights -->
+          <!-- Screen 3: Insights -->
           <div class="phone-screen screen-insights">
-            <div class="mock-insights-header">
-              <div class="mock-insights-title">Your Insights</div>
-              <div class="mock-claude-badge">Claude AI</div>
-            </div>
-            <div class="mock-insight-card featured">
-              <div class="mock-insight-icon">&#x2728;</div>
-              <div class="mock-insight-body">
-                <div class="mock-insight-label">PATTERN DETECTED</div>
-                <div class="mock-insight-text">Your mood is notably higher on days you mention exercise or being outdoors.</div>
-              </div>
-            </div>
-            <div class="mock-insight-card">
-              <div class="mock-insight-icon">&#x1F4C5;</div>
-              <div class="mock-insight-body">
-                <div class="mock-insight-label">THIS WEEK</div>
-                <div class="mock-insight-text">5 entries. You wrote about connection 3 times — something worth exploring.</div>
-              </div>
-            </div>
+            <!-- Large Playfair title -->
+            <div class="mock-insights-title">Insights</div>
+            <!-- YOUR MOOD section -->
+            <div class="mock-section-label" style="margin-bottom:6px;">YOUR MOOD</div>
+            <!-- Mood chart card -->
             <div class="mock-mood-chart">
-              <div class="mock-chart-label">Mood — last 7 days</div>
+              <div class="mock-chart-header">MOOD — LAST 7 DAYS</div>
               <div class="mock-chart-bars">
-                <div class="mock-bar" style="height: 40%;"></div>
-                <div class="mock-bar" style="height: 60%;"></div>
-                <div class="mock-bar" style="height: 45%;"></div>
-                <div class="mock-bar" style="height: 70%;"></div>
-                <div class="mock-bar" style="height: 55%;"></div>
-                <div class="mock-bar" style="height: 85%;"></div>
-                <div class="mock-bar active" style="height: 90%;"></div>
-              </div>
-              <div class="mock-chart-days">
-                <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+                <div class="mock-bar-wrap">
+                  <div class="mock-bar-emoji">😕</div>
+                  <div class="mock-bar mock-bar-2" style="height:11px;"></div>
+                  <div class="mock-bar-day">M</div>
+                </div>
+                <div class="mock-bar-wrap">
+                  <div class="mock-bar-emoji">😐</div>
+                  <div class="mock-bar mock-bar-3" style="height:18px;"></div>
+                  <div class="mock-bar-day">T</div>
+                </div>
+                <div class="mock-bar-wrap">
+                  <div class="mock-bar-emoji">😕</div>
+                  <div class="mock-bar mock-bar-2" style="height:12px;"></div>
+                  <div class="mock-bar-day">W</div>
+                </div>
+                <div class="mock-bar-wrap">
+                  <div class="mock-bar-emoji">🙂</div>
+                  <div class="mock-bar mock-bar-4" style="height:25px;"></div>
+                  <div class="mock-bar-day">T</div>
+                </div>
+                <div class="mock-bar-wrap">
+                  <div class="mock-bar-emoji">😊</div>
+                  <div class="mock-bar mock-bar-5" style="height:32px;"></div>
+                  <div class="mock-bar-day">F</div>
+                </div>
+                <div class="mock-bar-wrap">
+                  <div class="mock-bar-emoji">🙂</div>
+                  <div class="mock-bar mock-bar-4" style="height:23px;"></div>
+                  <div class="mock-bar-day">S</div>
+                </div>
+                <div class="mock-bar-wrap mock-bar-wrap-today">
+                  <div class="mock-bar-emoji">😐</div>
+                  <div class="mock-bar mock-bar-today" style="height:16px;"></div>
+                  <div class="mock-bar-day mock-bar-day-today">S</div>
+                </div>
               </div>
             </div>
+            <!-- This Week review -->
+            <div class="mock-section-label mock-section-gold" style="margin-bottom:2px;">THIS WEEK</div>
+            <div class="mock-week-date-range">MAR 11 – MAR 17</div>
+            <div class="mock-week-review">This week had some real texture to it. You found moments of lightness — a walk, a conversation — even when things felt heavy. That balance is worth noticing.</div>
+            <!-- Pattern cards -->
+            <div class="mock-pattern-card">
+              <div class="mock-pattern-title">MORNING ROUTINES LIFT YOUR MOOD</div>
+              <div class="mock-pattern-text">On days you wrote about a morning routine, your mood score averaged 0.8 points higher.</div>
+            </div>
+            <div class="mock-pattern-card">
+              <div class="mock-pattern-title">NATURE TIME SHIFTS YOUR ENERGY</div>
+              <div class="mock-pattern-text">Entries mentioning being outdoors consistently carry a warmer, more open tone.</div>
+            </div>
+            <!-- On-demand review -->
+            <div class="mock-section-label" style="margin-top:8px;margin-bottom:5px;">ON-DEMAND REVIEW</div>
+            <div class="mock-segment-control">
+              <div class="mock-segment-btn mock-segment-active">Past Week</div>
+              <div class="mock-segment-btn">Past Month</div>
+            </div>
+            <div class="mock-generate-btn">Generate Review</div>
           </div>
 
         </div><!-- /phone-carousel -->
