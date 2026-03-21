@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset Password — Inwardly</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#5B4A8A">
+
+  <!-- Fonts (same as landing page) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../app-icon.png">
+
+  <!-- Supabase JS (CDN) — only the auth module is used -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+  <style>
+    :root {
+      --indigo: #5B4A8A;
+      --indigo-light: #7B6BAA;
+      --gold: #D4A854;
+      --canvas: #FAFAF9;
+      --surface: #FFFFFF;
+      --elevated: #F4F2F7;
+      --text-primary: #1C1A24;
+      --text-secondary: #5A5766;
+      --text-tertiary: #9490A0;
+      --text-inverse: #FFFFFF;
+      --border-subtle: #E8E5EF;
+      --border-medium: #D4CFDF;
+      --destructive: #C0392B;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-primary);
+      background: var(--canvas);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* -- Brand header -- */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+    }
+
+    .brand span {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--indigo);
+      letter-spacing: -0.3px;
+    }
+
+    /* -- Card -- */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 8px 32px rgba(91, 74, 138, 0.06);
+    }
+
+    .card h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .card p.subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    /* -- Form -- */
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      letter-spacing: 0.2px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--border-medium);
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--text-primary);
+      background: var(--canvas);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .field input:focus {
+      border-color: var(--indigo-light);
+      box-shadow: 0 0 0 3px rgba(91, 74, 138, 0.1);
+    }
+
+    .field input.input-error {
+      border-color: var(--destructive);
+    }
+
+    .field .error-text {
+      font-size: 12px;
+      color: var(--destructive);
+      margin-top: 5px;
+    }
+
+    /* -- Button -- */
+    .btn-primary {
+      display: block;
+      width: 100%;
+      padding: 14px 24px;
+      background: linear-gradient(135deg, var(--indigo), #6B5A9E);
+      color: var(--text-inverse);
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s;
+      box-shadow: 0 4px 20px rgba(91, 74, 138, 0.25);
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(91, 74, 138, 0.35); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .btn-secondary {
+      display: block;
+      width: 100%;
+      padding: 14px 24px;
+      background: var(--surface);
+      color: var(--indigo);
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      border: 1.5px solid var(--border-medium);
+      border-radius: 14px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      margin-top: 12px;
+      transition: border-color 0.2s;
+    }
+
+    .btn-secondary:hover { border-color: var(--indigo-light); }
+
+    /* -- States -- */
+    .hidden { display: none !important; }
+
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .success-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      background: rgba(91, 74, 138, 0.1);
+      border-radius: 50%;
+      margin: 0 auto 20px;
+    }
+
+    .success-icon svg { color: var(--indigo); }
+
+    .error-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      background: rgba(192, 57, 43, 0.1);
+      border-radius: 50%;
+      margin: 0 auto 20px;
+    }
+
+    .loading-state {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .loading-state .spinner {
+      width: 32px;
+      height: 32px;
+      border-color: rgba(91, 74, 138, 0.2);
+      border-top-color: var(--indigo);
+      margin-bottom: 16px;
+    }
+
+    .loading-state p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    /* -- Footer -- */
+    .page-footer {
+      margin-top: 32px;
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    .page-footer a {
+      color: var(--indigo);
+      text-decoration: none;
+    }
+
+    .page-footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- Brand -->
+  <div class="brand">
+    <img src="../app-icon.png" alt="Inwardly">
+    <span>inwardly</span>
+  </div>
+
+  <!-- Card -->
+  <div class="card">
+
+    <!-- Loading state -->
+    <div id="state-loading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Verifying your reset link...</p>
+    </div>
+
+    <!-- Form state -->
+    <div id="state-form" class="hidden">
+      <h1>Reset Password</h1>
+      <p class="subtitle">Enter your new password below.</p>
+      <form id="reset-form" autocomplete="off">
+        <div class="field">
+          <label for="password">New Password</label>
+          <input type="password" id="password" placeholder="At least 8 characters" autocomplete="new-password" required>
+          <div class="error-text hidden" id="password-error"></div>
+        </div>
+        <div class="field">
+          <label for="confirm">Confirm Password</label>
+          <input type="password" id="confirm" placeholder="Re-enter your password" autocomplete="new-password" required>
+          <div class="error-text hidden" id="confirm-error"></div>
+        </div>
+        <div class="error-text hidden" id="form-error" style="text-align:center;margin-bottom:16px;"></div>
+        <button type="submit" class="btn-primary" id="submit-btn">Update Password</button>
+      </form>
+    </div>
+
+    <!-- Success state -->
+    <div id="state-success" class="hidden">
+      <div class="success-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h1>Password Updated</h1>
+      <p class="subtitle">Your password has been changed successfully. You can now sign in with your new password.</p>
+      <a href="inwardly://" class="btn-primary" id="open-app-btn">Open Inwardly</a>
+      <a href="/" class="btn-secondary">Back to Home</a>
+    </div>
+
+    <!-- Invalid / expired link state -->
+    <div id="state-invalid" class="hidden">
+      <div class="error-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </div>
+      <h1>Link Expired</h1>
+      <p class="subtitle">This password reset link has expired or is invalid. Please request a new one from the app.</p>
+      <a href="inwardly://" class="btn-primary" id="open-app-btn-expired">Open Inwardly</a>
+      <a href="/" class="btn-secondary">Back to Home</a>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <a href="/">goinwardly.app</a> &middot; <a href="/privacy">Privacy Policy</a>
+  </div>
+
+  <script>
+    // -----------------------------------------------------------------------
+    // Supabase config (public anon key — safe to expose)
+    // -----------------------------------------------------------------------
+    var SUPABASE_URL = 'https://xenggqcrnuatxwdclsyc.supabase.co';
+    var SUPABASE_ANON_KEY = 'sb_publishable_6uO-9WfMOzYBQ--ZM7lMfQ_HiKjpY3S';
+
+    var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // -----------------------------------------------------------------------
+    // DOM refs
+    // -----------------------------------------------------------------------
+    var stateLoading = document.getElementById('state-loading');
+    var stateForm    = document.getElementById('state-form');
+    var stateSuccess = document.getElementById('state-success');
+    var stateInvalid = document.getElementById('state-invalid');
+    var resetForm    = document.getElementById('reset-form');
+    var passwordIn   = document.getElementById('password');
+    var confirmIn    = document.getElementById('confirm');
+    var passwordErr  = document.getElementById('password-error');
+    var confirmErr   = document.getElementById('confirm-error');
+    var formErr      = document.getElementById('form-error');
+    var submitBtn    = document.getElementById('submit-btn');
+
+    function show(el) { el.classList.remove('hidden'); }
+    function hide(el) { el.classList.add('hidden'); }
+
+    function showState(name) {
+      hide(stateLoading); hide(stateForm); hide(stateSuccess); hide(stateInvalid);
+      switch (name) {
+        case 'loading': show(stateLoading); break;
+        case 'form':    show(stateForm); break;
+        case 'success': show(stateSuccess); break;
+        case 'invalid': show(stateInvalid); break;
+      }
+    }
+
+    // -----------------------------------------------------------------------
+    // Parse tokens from URL hash fragment
+    // Supabase redirects: ...#access_token=...&refresh_token=...&type=recovery
+    // -----------------------------------------------------------------------
+    function parseHash() {
+      var hash = window.location.hash.substring(1); // remove #
+      if (!hash) return null;
+      var params = new URLSearchParams(hash);
+      return {
+        accessToken:  params.get('access_token'),
+        refreshToken: params.get('refresh_token'),
+        type:         params.get('type'),
+      };
+    }
+
+    // -----------------------------------------------------------------------
+    // iOS detection — redirect into app via deep link
+    // -----------------------------------------------------------------------
+    function isIOS() {
+      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
+
+    // -----------------------------------------------------------------------
+    // Init
+    // -----------------------------------------------------------------------
+    (async function init() {
+      var tokens = parseHash();
+
+      // No tokens → invalid link
+      if (!tokens || !tokens.accessToken || !tokens.refreshToken) {
+        showState('invalid');
+        return;
+      }
+
+      // Not a recovery token → invalid
+      if (tokens.type !== 'recovery') {
+        showState('invalid');
+        return;
+      }
+
+      // On iOS: try to open the app with the deep link (pass tokens through)
+      if (isIOS()) {
+        var deepLink = 'inwardly://reset-password' + window.location.hash;
+        window.location.href = deepLink;
+
+        // If the app doesn't open within 1.5s, fall through to web form
+        await new Promise(function(r) { setTimeout(r, 1500); });
+
+        // Still here → app isn't installed or didn't handle it. Show web form.
+      }
+
+      // Establish session with Supabase using the tokens
+      try {
+        var result = await sb.auth.setSession({
+          access_token: tokens.accessToken,
+          refresh_token: tokens.refreshToken,
+        });
+
+        if (result.error) {
+          console.error('setSession error:', result.error.message);
+          showState('invalid');
+          return;
+        }
+
+        showState('form');
+      } catch (err) {
+        console.error('Session error:', err);
+        showState('invalid');
+      }
+    })();
+
+    // -----------------------------------------------------------------------
+    // Form submission
+    // -----------------------------------------------------------------------
+    resetForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      // Clear errors
+      hide(passwordErr); hide(confirmErr); hide(formErr);
+      passwordIn.classList.remove('input-error');
+      confirmIn.classList.remove('input-error');
+
+      var pw = passwordIn.value;
+      var cf = confirmIn.value;
+      var valid = true;
+
+      if (pw.length < 8) {
+        passwordErr.textContent = 'Password must be at least 8 characters';
+        show(passwordErr);
+        passwordIn.classList.add('input-error');
+        valid = false;
+      }
+
+      if (pw !== cf) {
+        confirmErr.textContent = 'Passwords do not match';
+        show(confirmErr);
+        confirmIn.classList.add('input-error');
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      // Disable button + show spinner
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner"></span>Updating...';
+
+      try {
+        var result = await sb.auth.updateUser({ password: pw });
+
+        if (result.error) {
+          formErr.textContent = result.error.message;
+          show(formErr);
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Update Password';
+          return;
+        }
+
+        // Sign out the recovery session
+        await sb.auth.signOut();
+
+        showState('success');
+      } catch (err) {
+        formErr.textContent = 'Something went wrong. Please try again.';
+        show(formErr);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Update Password';
+      }
+    });
+
+    // Clear errors on input
+    passwordIn.addEventListener('input', function() {
+      hide(passwordErr);
+      passwordIn.classList.remove('input-error');
+    });
+    confirmIn.addEventListener('input', function() {
+      hide(confirmErr);
+      confirmIn.classList.remove('input-error');
+    });
+  </script>
+</body>
+</html>
