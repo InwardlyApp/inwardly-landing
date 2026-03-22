@@ -406,7 +406,10 @@
 
       // On iOS: try to open the app with the deep link (pass tokens through)
       if (isIOS()) {
-        var deepLink = 'inwardly://reset-password' + window.location.hash;
+        // iOS strips hash fragments from custom scheme URLs, so convert
+        // the hash params to query params for the deep link.
+        var queryString = window.location.hash.substring(1); // remove #
+        var deepLink = 'inwardly://reset-password?' + queryString;
         window.location.href = deepLink;
 
         // If the app doesn't open within 1.5s, fall through to web form
