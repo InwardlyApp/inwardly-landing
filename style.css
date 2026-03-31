@@ -276,13 +276,13 @@ a {
 
 .phone-frame {
   position: relative;
-  width: 280px;
-  height: 580px;
+  width: 310px;
+  height: 640px;
   background: var(--text-primary);
-  border-radius: 44px;
+  border-radius: 50px;
   padding: 14px;
   box-shadow:
-    0 30px 80px rgba(28, 26, 36, 0.25),
+    0 40px 90px rgba(28, 26, 36, 0.28),
     0 0 0 1px rgba(255, 255, 255, 0.08) inset,
     0 1px 0 rgba(255, 255, 255, 0.15) inset;
   animation: gentleFloat 4s ease-in-out infinite;
@@ -294,10 +294,10 @@ a {
   top: 14px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80px;
-  height: 26px;
+  width: 88px;
+  height: 28px;
   background: var(--text-primary);
-  border-radius: 0 0 16px 16px;
+  border-radius: 0 0 18px 18px;
   z-index: 10;
 }
 
@@ -306,7 +306,7 @@ a {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 32px;
+  border-radius: 38px;
   overflow: hidden;
 }
 
@@ -315,8 +315,8 @@ a {
   position: absolute;
   inset: 0;
   background: var(--canvas);
-  border-radius: 32px;
-  padding: 48px 18px 20px;
+  border-radius: 38px;
+  padding: 52px 18px 20px;
   overflow: hidden;
   opacity: 0;
   transform: translateX(40px);
@@ -509,41 +509,91 @@ a {
   letter-spacing: 0.1px;
 }
 
-/* This Month entry rows */
-.mock-month-mood {
-  font-size: 12px;
-  flex-shrink: 0;
+/* This Month — card carousel */
+.mock-month-cards-wrap {
+  display: flex;
+  gap: 8px;
+  overflow: hidden; /* clips the peeking card */
 }
 
-.mock-month-entry {
+.mock-month-card {
+  flex-shrink: 0;
+  width: calc(100% - 20px); /* full-width minus peek gap */
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 11px;
+  padding: 9px 11px;
+}
+
+.mock-month-card-peek {
+  width: 80%; /* shows partially to hint at swipeable carousel */
+  opacity: 0.55;
+}
+
+.mock-month-card-top {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 0;
-  border-bottom: 1px solid var(--border-subtle);
+  justify-content: space-between;
+  margin-bottom: 5px;
 }
 
-.mock-month-entry:last-child {
-  border-bottom: none;
+.mock-mood-badge {
+  font-size: 8.5px;
+  font-weight: 700;
+  border-radius: 100px;
+  padding: 2px 7px;
 }
 
-.mock-month-date {
-  font-size: 9px;
+.mock-mood-badge-good {
+  background: rgba(196, 168, 130, 0.18);
+  color: #8B6B2A;
+}
+
+.mock-mood-badge-great {
+  background: rgba(212, 137, 106, 0.15);
+  color: #9A4A28;
+}
+
+.mock-month-card-date {
+  font-size: 8px;
   font-weight: 600;
   color: var(--text-tertiary);
   text-transform: uppercase;
   letter-spacing: 0.4px;
-  flex-shrink: 0;
-  width: 30px;
 }
 
-.mock-month-preview {
+.mock-month-card-preview {
   font-size: 9.5px;
   color: var(--text-secondary);
-  line-height: 1.4;
-  white-space: nowrap;
+  line-height: 1.45;
+  font-style: italic;
+  font-family: Georgia, serif;
+  /* Two lines max */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
+}
+
+/* Dot indicators below This Month cards */
+.mock-carousel-dots {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.mock-carousel-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--border-medium);
+}
+
+.mock-carousel-dot-active {
+  background: var(--indigo);
+  width: 14px;
+  border-radius: 3px;
 }
 
 /* ---- Screen 2: Write entry ---- */
@@ -579,21 +629,37 @@ a {
   padding: 3px 10px;
 }
 
-/* Write area: placeholder version (not in-progress text) */
+/* Write area: shows in-progress text */
 .mock-write-area {
   background: var(--surface);
   border: 1px solid var(--border-subtle);
   border-radius: 10px;
   padding: 10px 10px;
   margin-bottom: 8px;
-  min-height: 52px;
+  min-height: 60px;
 }
 
-.mock-write-placeholder {
-  font-size: 11px;
-  color: var(--text-tertiary);
+.mock-write-text {
+  font-size: 10.5px;
+  color: var(--text-primary);
   font-family: Georgia, serif;
-  font-style: italic;
+  line-height: 1.55;
+}
+
+/* Blinking cursor */
+.mock-cursor {
+  display: inline-block;
+  width: 1px;
+  background: var(--indigo);
+  color: var(--indigo);
+  animation: blink 1s step-end infinite;
+  font-weight: 300;
+  margin-left: 1px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 /* Toolbar: word count + pill buttons */
@@ -697,22 +763,74 @@ a {
   margin-bottom: 8px;
 }
 
+/* YOUR MOOD header row: label + day toggle */
+.mock-mood-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+
+.mock-day-toggle {
+  display: flex;
+  background: var(--elevated);
+  border-radius: 7px;
+  padding: 2px;
+  gap: 1px;
+}
+
+.mock-day-btn {
+  font-size: 8px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  padding: 2px 6px;
+  border-radius: 5px;
+}
+
+.mock-day-btn-active {
+  background: var(--surface);
+  color: var(--indigo);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+}
+
 /* Mood chart card */
 .mock-mood-chart {
   background: var(--surface);
   border: 1px solid var(--border-subtle);
   border-radius: 10px;
   padding: 8px 10px;
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 }
 
-.mock-chart-header {
-  font-size: 7.5px;
+/* Mood summary stat boxes below chart */
+.mock-mood-stats-row {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 9px;
+}
+
+.mock-mood-stat {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 5px 4px;
+  text-align: center;
+}
+
+.mock-mood-stat-val {
+  font-size: 11px;
   font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.mock-mood-stat-lbl {
+  font-size: 6.5px;
   color: var(--text-tertiary);
-  letter-spacing: 0.7px;
-  text-transform: uppercase;
-  margin-bottom: 6px;
+  font-weight: 500;
+  margin-top: 2px;
+  line-height: 1.2;
 }
 
 /* Bar chart: 3-row CSS grid per column — emoji / bar (grows) / day label
@@ -749,12 +867,18 @@ a {
   align-self: end;
 }
 
-/* Mood-colored bars matching brand mood scale */
-.mock-bar-2 { background: #8A7EC2; }  /* meh — dusty purple */
-.mock-bar-3 { background: #7BA89C; }  /* okay — sage green */
-.mock-bar-4 { background: #C4A882; }  /* good — warm gold */
-.mock-bar-5 { background: #D4896A; }  /* great — coral-apricot */
+/* Mood-colored bars — matching real app mood scale */
+.mock-bar-meh   { background: #9B8EC4; }  /* meh — dusty purple */
+.mock-bar-okay  { background: #7BA89C; }  /* okay — sage green */
+.mock-bar-good  { background: #D4A854; }  /* good — warm gold */
+.mock-bar-great { background: #E07B5A; }  /* great — coral-apricot */
 .mock-bar-today { background: linear-gradient(180deg, rgba(91,74,138,0.45), var(--indigo)); }
+
+/* Legacy aliases (kept for backward compat in case other code references them) */
+.mock-bar-2 { background: #9B8EC4; }
+.mock-bar-3 { background: #7BA89C; }
+.mock-bar-4 { background: #D4A854; }
+.mock-bar-5 { background: #E07B5A; }
 
 .mock-bar-day {
   font-size: 7px;
@@ -795,18 +919,19 @@ a {
 .mock-pattern-card {
   background: var(--surface);
   border: 1px solid var(--border-subtle);
+  border-left: 2.5px solid var(--gold);
   border-radius: 8px;
   padding: 7px 9px;
   margin-bottom: 5px;
 }
 
 .mock-pattern-title {
-  font-size: 7.5px;
+  font-size: 9px;
   font-weight: 700;
   color: var(--gold);
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
+  letter-spacing: 0.1px;
   margin-bottom: 3px;
+  line-height: 1.3;
 }
 
 .mock-pattern-text {
@@ -1409,21 +1534,21 @@ a {
   }
 
   .phone-frame {
-    width: 248px;
-    height: 510px;
-    border-radius: 38px;
+    width: 268px;
+    height: 556px;
+    border-radius: 44px;
     padding: 12px;
   }
 
   .phone-notch {
-    width: 68px;
-    height: 22px;
+    width: 76px;
+    height: 24px;
     top: 12px;
   }
 
   .phone-screen {
-    border-radius: 28px;
-    padding: 42px 14px 16px;
+    border-radius: 34px;
+    padding: 46px 14px 16px;
   }
 
   .privacy-card {

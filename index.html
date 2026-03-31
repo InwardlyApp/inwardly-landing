@@ -111,16 +111,30 @@
               <span class="mock-cta-text">Write Today's Entry</span>
             </div>
             <!-- This Month section -->
-            <div class="mock-section-label" style="margin-top:10px;margin-bottom:5px;">THIS MONTH</div>
-            <div class="mock-month-entry">
-              <span class="mock-month-mood">🙂</span>
-              <div class="mock-month-date">Mar 15</div>
-              <div class="mock-month-preview">Finally took that walk by the river...</div>
+            <div class="mock-section-label" style="margin-top:10px;margin-bottom:6px;">THIS MONTH</div>
+            <div class="mock-month-cards-wrap">
+              <!-- Card 1 -->
+              <div class="mock-month-card">
+                <div class="mock-month-card-top">
+                  <div class="mock-mood-badge mock-mood-badge-good">🙂 Good</div>
+                  <div class="mock-month-card-date">Mar 15</div>
+                </div>
+                <div class="mock-month-card-preview">"Finally took that walk by the river. Something about the light made everything feel manageable again."</div>
+              </div>
+              <!-- Card 2 (partially visible to signal carousel) -->
+              <div class="mock-month-card mock-month-card-peek">
+                <div class="mock-month-card-top">
+                  <div class="mock-mood-badge mock-mood-badge-great">😊 Great</div>
+                  <div class="mock-month-card-date">Mar 14</div>
+                </div>
+                <div class="mock-month-card-preview">"The meeting went better than I expected — felt heard for the first time in weeks."</div>
+              </div>
             </div>
-            <div class="mock-month-entry">
-              <span class="mock-month-mood">😊</span>
-              <div class="mock-month-date">Mar 14</div>
-              <div class="mock-month-preview">The meeting went better than expected...</div>
+            <!-- Dot indicators -->
+            <div class="mock-carousel-dots">
+              <span class="mock-carousel-dot mock-carousel-dot-active"></span>
+              <span class="mock-carousel-dot"></span>
+              <span class="mock-carousel-dot"></span>
             </div>
           </div>
 
@@ -137,15 +151,15 @@
             <div class="mock-prompt-card" style="margin-bottom:10px;">
               <div class="mock-prompt-text">"What would it feel like to let go of one thing you've been holding onto?"</div>
             </div>
-            <!-- Write area -->
+            <!-- Write area — shows sample text in progress -->
             <div class="mock-write-area">
-              <div class="mock-write-placeholder">Begin writing...</div>
+              <div class="mock-write-text">I've been carrying the weight of that conversation with my sister for weeks now. Part of me keeps replaying it, looking for what I could have said differently. Maybe it's time to just<span class="mock-cursor">|</span></div>
             </div>
             <!-- Bottom toolbar: word count + pills -->
             <div class="mock-toolbar-row">
-              <span class="mock-word-count">0 words</span>
+              <span class="mock-word-count">38 words</span>
               <div class="mock-pills-row">
-                <span class="mock-pill mock-pill-active">No journal</span>
+                <span class="mock-pill mock-pill-active">Personal</span>
                 <span class="mock-pill">Template</span>
                 <span class="mock-pill">Location</span>
                 <span class="mock-pill">Photo</span>
@@ -182,47 +196,72 @@
           <div class="phone-screen screen-insights">
             <!-- Large Playfair title -->
             <div class="mock-insights-title">Insights</div>
-            <!-- YOUR MOOD section -->
-            <div class="mock-section-label" style="margin-bottom:6px;">YOUR MOOD</div>
+            <!-- YOUR MOOD section with day-range toggle -->
+            <div class="mock-mood-header-row">
+              <div class="mock-section-label" style="margin-bottom:0;">YOUR MOOD</div>
+              <div class="mock-day-toggle">
+                <span class="mock-day-btn mock-day-btn-active">7d</span>
+                <span class="mock-day-btn">14d</span>
+                <span class="mock-day-btn">30d</span>
+              </div>
+            </div>
             <!-- Mood chart card -->
             <div class="mock-mood-chart">
-              <div class="mock-chart-header">MOOD — LAST 7 DAYS</div>
               <div class="mock-chart-bars">
                 <div class="mock-bar-wrap">
                   <div class="mock-bar-emoji">😕</div>
-                  <div class="mock-bar mock-bar-2" style="height:11px;"></div>
+                  <div class="mock-bar mock-bar-meh" style="height:12px;"></div>
                   <div class="mock-bar-day">M</div>
                 </div>
                 <div class="mock-bar-wrap">
                   <div class="mock-bar-emoji">😐</div>
-                  <div class="mock-bar mock-bar-3" style="height:18px;"></div>
+                  <div class="mock-bar mock-bar-okay" style="height:18px;"></div>
                   <div class="mock-bar-day">T</div>
                 </div>
                 <div class="mock-bar-wrap">
                   <div class="mock-bar-emoji">😕</div>
-                  <div class="mock-bar mock-bar-2" style="height:12px;"></div>
+                  <div class="mock-bar mock-bar-meh" style="height:13px;"></div>
                   <div class="mock-bar-day">W</div>
                 </div>
                 <div class="mock-bar-wrap">
                   <div class="mock-bar-emoji">🙂</div>
-                  <div class="mock-bar mock-bar-4" style="height:25px;"></div>
+                  <div class="mock-bar mock-bar-good" style="height:26px;"></div>
                   <div class="mock-bar-day">T</div>
                 </div>
                 <div class="mock-bar-wrap">
                   <div class="mock-bar-emoji">😊</div>
-                  <div class="mock-bar mock-bar-5" style="height:32px;"></div>
+                  <div class="mock-bar mock-bar-great" style="height:34px;"></div>
                   <div class="mock-bar-day">F</div>
                 </div>
                 <div class="mock-bar-wrap">
                   <div class="mock-bar-emoji">🙂</div>
-                  <div class="mock-bar mock-bar-4" style="height:23px;"></div>
+                  <div class="mock-bar mock-bar-good" style="height:24px;"></div>
                   <div class="mock-bar-day">S</div>
                 </div>
                 <div class="mock-bar-wrap mock-bar-wrap-today">
                   <div class="mock-bar-emoji">😐</div>
-                  <div class="mock-bar mock-bar-today" style="height:16px;"></div>
+                  <div class="mock-bar mock-bar-today" style="height:17px;"></div>
                   <div class="mock-bar-day mock-bar-day-today">S</div>
                 </div>
+              </div>
+            </div>
+            <!-- Mood summary stat boxes -->
+            <div class="mock-mood-stats-row">
+              <div class="mock-mood-stat">
+                <div class="mock-mood-stat-val">3.4</div>
+                <div class="mock-mood-stat-lbl">Avg Mood</div>
+              </div>
+              <div class="mock-mood-stat">
+                <div class="mock-mood-stat-val">🙂</div>
+                <div class="mock-mood-stat-lbl">Most Common</div>
+              </div>
+              <div class="mock-mood-stat">
+                <div class="mock-mood-stat-val">2–5</div>
+                <div class="mock-mood-stat-lbl">Mood Range</div>
+              </div>
+              <div class="mock-mood-stat">
+                <div class="mock-mood-stat-val">6</div>
+                <div class="mock-mood-stat-lbl">Entries</div>
               </div>
             </div>
             <!-- This Week review -->
@@ -230,12 +269,13 @@
             <div class="mock-week-date-range">MAR 11 – MAR 17</div>
             <div class="mock-week-review">This week had some real texture to it. You found moments of lightness — a walk, a conversation — even when things felt heavy. That balance is worth noticing.</div>
             <!-- Pattern cards -->
+            <div class="mock-section-label" style="margin-bottom:5px;">PATTERNS</div>
             <div class="mock-pattern-card">
-              <div class="mock-pattern-title">MORNING ROUTINES LIFT YOUR MOOD</div>
+              <div class="mock-pattern-title">Morning routines lift your mood</div>
               <div class="mock-pattern-text">On days you wrote about a morning routine, your mood score averaged 0.8 points higher.</div>
             </div>
             <div class="mock-pattern-card">
-              <div class="mock-pattern-title">NATURE TIME SHIFTS YOUR ENERGY</div>
+              <div class="mock-pattern-title">Nature time shifts your energy</div>
               <div class="mock-pattern-text">Entries mentioning being outdoors consistently carry a warmer, more open tone.</div>
             </div>
             <!-- On-demand review -->
