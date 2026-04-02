@@ -560,6 +560,88 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="section-inner">
+      <p class="section-label">Got questions</p>
+      <h2 class="section-title">Everything you need to know</h2>
+
+      <div class="faq-list">
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>Is my journal really private? Who can read it?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Only you. Every entry is encrypted with AES-256 on your device before it's ever uploaded. The encryption key lives in your phone's secure keychain — not on our servers. Even if someone gained access to our database, all they'd see is unreadable ciphertext. When you use AI features, your decrypted text is sent to Claude via a secure proxy and immediately discarded — never stored.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>Does Inwardly work offline?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>You can read and write journal entries without an internet connection — your entries are stored locally on your device. AI features (weekly reviews, pattern detection, personalized prompts) require a connection since they call Claude. Your entries sync to the cloud automatically when you reconnect.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>What happens to my data if I cancel Premium?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Nothing is deleted. You keep every entry you've ever written — always. If you cancel, you move back to the free tier and lose access to AI features going forward, but your full journal history stays intact and readable. You can also export everything at any time from Settings.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>Can I export my journal entries?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Yes — always. Go to Settings → Export and choose between JSON (for importing into other tools) or plain text (for reading anywhere). Your data is yours, and we make it easy to take it with you. This is available on the free tier too.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>How is Inwardly different from Day One or Notion?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Day One is a great capture tool but its AI features are basic and surface-level. Notion is powerful but it's a productivity workspace, not a reflective journaling experience — there's no emotional layer. Inwardly is built specifically around understanding yourself: mood tracking, pattern detection, and weekly AI reviews powered by Claude that actually synthesise what you've written and surface things you might not see yourself. And everything is encrypted by default — Day One encrypts only if you pay for it.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>Is there a free trial for Premium?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Yes — 7 days free, no payment required upfront. You get full access to every Premium feature during the trial. Cancel before day 7 and you're charged nothing. After the trial, Premium is $4.99/month or $39.99/year (save 33%).</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>Does Inwardly train AI on my journal entries?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Never. Your entries are used only to generate your insights — and nothing else. We don't sell your data, serve ads, or use your writing to train any AI model. Anthropic (the company behind Claude) also has a policy against using API data for training. Your words exist to help you understand yourself, not to help anyone else build products.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="cta-section">
     <div class="cta-glow"></div>
@@ -574,6 +656,17 @@
       </a>
     </div>
   </section>
+
+  <!-- Sticky mobile CTA -->
+  <div class="mobile-sticky-cta" id="mobileCta" aria-hidden="true">
+    <a href="#" class="btn btn-primary mobile-sticky-btn" id="app-store-btn-mobile">
+      <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.97 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+      </svg>
+      <span>Download on the App Store</span>
+    </a>
+    <p class="mobile-sticky-note">Free to start · 7-day Premium trial</p>
+  </div>
 
   <!-- Footer -->
   <footer class="footer">
@@ -592,11 +685,11 @@
   </footer>
 
   <script>
-    // Phone screen carousel
+    // ── Phone screen carousel ──────────────────────────────────────────────
     (function() {
       var screens = document.querySelectorAll('.phone-screen');
-      var dots = document.querySelectorAll('.carousel-dot');
-      var labels = document.querySelectorAll('.carousel-label');
+      var dots    = document.querySelectorAll('.carousel-dot');
+      var labels  = document.querySelectorAll('.carousel-label');
       var current = 0;
       var timer;
 
@@ -610,35 +703,93 @@
         labels[current].classList.add('active');
       }
 
-      function next() {
-        goTo((current + 1) % screens.length);
-      }
-
-      function startAuto() {
-        timer = setInterval(next, 3200);
-      }
-
-      function stopAuto() {
-        clearInterval(timer);
-      }
+      function next() { goTo((current + 1) % screens.length); }
+      function startAuto() { timer = setInterval(next, 3200); }
+      function stopAuto()  { clearInterval(timer); }
 
       dots.forEach(function(dot) {
         dot.addEventListener('click', function() {
-          stopAuto();
-          goTo(parseInt(dot.dataset.index, 10));
-          startAuto();
+          stopAuto(); goTo(parseInt(dot.dataset.index, 10)); startAuto();
         });
       });
-
       labels.forEach(function(label) {
         label.addEventListener('click', function() {
-          stopAuto();
-          goTo(parseInt(label.dataset.index, 10));
-          startAuto();
+          stopAuto(); goTo(parseInt(label.dataset.index, 10)); startAuto();
+        });
+      });
+      startAuto();
+    })();
+
+    // ── Scroll reveal animations ───────────────────────────────────────────
+    (function() {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      // Stagger children inside grid/list containers
+      document.querySelectorAll('.feature-grid, .pricing-grid, .faq-list').forEach(function(container) {
+        var children = container.querySelectorAll('.feature-card, .pricing-card, .faq-item');
+        children.forEach(function(el, i) {
+          el.style.transitionDelay = (i * 80) + 'ms';
+          el.classList.add('reveal');
         });
       });
 
-      startAuto();
+      // Single reveal elements
+      document.querySelectorAll('.reveal, .privacy-card, .cta-title, .cta-subtitle').forEach(function(el) {
+        observer.observe(el);
+      });
+    })();
+
+    // ── FAQ accordion ──────────────────────────────────────────────────────
+    (function() {
+      document.querySelectorAll('.faq-question').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var item     = btn.parentElement;
+          var answer   = item.querySelector('.faq-answer');
+          var expanded = btn.getAttribute('aria-expanded') === 'true';
+
+          // Close all others
+          document.querySelectorAll('.faq-item').forEach(function(other) {
+            if (other !== item) {
+              other.classList.remove('open');
+              other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+              other.querySelector('.faq-answer').style.maxHeight = '0';
+            }
+          });
+
+          // Toggle current
+          if (expanded) {
+            item.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+            answer.style.maxHeight = '0';
+          } else {
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+          }
+        });
+      });
+    })();
+
+    // ── Sticky mobile CTA ─────────────────────────────────────────────────
+    (function() {
+      var cta      = document.getElementById('mobileCta');
+      var heroBtn  = document.getElementById('app-store-btn');
+      if (!cta || !heroBtn) return;
+
+      var observer = new IntersectionObserver(function(entries) {
+        // Show sticky bar once the hero CTA scrolls out of view
+        cta.classList.toggle('visible', !entries[0].isIntersecting);
+        cta.setAttribute('aria-hidden', entries[0].isIntersecting ? 'true' : 'false');
+      }, { threshold: 0 });
+
+      observer.observe(heroBtn);
     })();
   </script>
 </body>
