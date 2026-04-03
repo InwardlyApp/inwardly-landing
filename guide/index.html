@@ -1,0 +1,2841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inwardly — User Guide</title>
+  <meta name="description" content="Complete user guide for Inwardly, the private AI-powered journaling app for iOS.">
+  <meta name="theme-color" content="#5B4A8A">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../app-icon.png">
+
+  <style>
+    /* ===================================================================
+       Inwardly User Guide — Dark Premium / Golden Hour
+       Canvas #1C1A24 · Indigo #7B6BAA · Gold #D4A854
+       =================================================================== */
+
+    :root {
+      --indigo: #7B6BAA;
+      --indigo-light: #9B8EC4;
+      --indigo-dark: #5B4A8A;
+      --indigo-glow: rgba(123, 107, 170, 0.35);
+      --gold: #D4A854;
+      --gold-light: #E0B96E;
+      --gold-glow: rgba(212, 168, 84, 0.25);
+
+      --canvas: #1C1A24;
+      --surface: rgba(37, 34, 48, 0.65);
+      --surface-solid: #252230;
+      --elevated: #2E2A3B;
+
+      --text-primary: #F0EDF8;
+      --text-secondary: #B0A9C4;
+      --text-tertiary: #7A728E;
+      --text-inverse: #FFFFFF;
+
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --border-medium: rgba(255, 255, 255, 0.12);
+      --border-gold: rgba(212, 168, 84, 0.30);
+      --border-indigo: rgba(123, 107, 170, 0.30);
+
+      --glass-bg: rgba(37, 34, 48, 0.60);
+      --glass-blur: blur(24px);
+      --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+
+      --sidebar-width: 272px;
+      --topbar-height: 64px;
+      --content-max: 780px;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-padding-top: 88px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-primary);
+      background: var(--canvas);
+      line-height: 1.7;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ===================================================================
+       Floating Orbs
+       =================================================================== */
+
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      will-change: transform;
+    }
+
+    .orb-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(91, 74, 138, 0.28) 0%, transparent 70%);
+      top: -180px; left: -160px;
+      filter: blur(60px);
+      animation: orbFloat1 18s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(212, 168, 84, 0.18) 0%, transparent 70%);
+      top: 10%; right: -140px;
+      filter: blur(70px);
+      animation: orbFloat2 22s ease-in-out infinite;
+    }
+    .orb-3 {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(123, 107, 170, 0.22) 0%, transparent 70%);
+      top: 45%; left: 35%;
+      filter: blur(80px);
+      animation: orbFloat3 26s ease-in-out infinite;
+    }
+    .orb-4 {
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, rgba(212, 168, 84, 0.14) 0%, transparent 70%);
+      top: 68%; right: 8%;
+      filter: blur(65px);
+      animation: orbFloat4 20s ease-in-out infinite;
+    }
+    .orb-5 {
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(91, 74, 138, 0.20) 0%, transparent 70%);
+      bottom: 5%; left: 10%;
+      filter: blur(55px);
+      animation: orbFloat1 24s ease-in-out infinite reverse;
+    }
+
+    @keyframes orbFloat1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(40px, 30px) scale(1.05); }
+      66%       { transform: translate(-20px, 50px) scale(0.97); }
+    }
+    @keyframes orbFloat2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      40%       { transform: translate(-50px, 40px) scale(1.08); }
+      70%       { transform: translate(30px, -30px) scale(0.95); }
+    }
+    @keyframes orbFloat3 {
+      0%, 100% { transform: translate(0, 0); }
+      50%       { transform: translate(-30px, -40px) scale(1.06); }
+    }
+    @keyframes orbFloat4 {
+      0%, 100% { transform: translate(0, 0); }
+      45%       { transform: translate(40px, -50px) scale(1.04); }
+      80%       { transform: translate(-20px, 20px) scale(0.98); }
+    }
+
+    /* ===================================================================
+       Top Nav
+       =================================================================== */
+
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--topbar-height);
+      background: rgba(28, 26, 36, 0.82);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border-bottom: var(--glass-border);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      gap: 16px;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .topbar-icon {
+      width: 30px; height: 30px;
+      border-radius: 7px;
+      object-fit: cover;
+      box-shadow: 0 2px 10px rgba(91, 74, 138, 0.45);
+    }
+
+    .topbar-wordmark {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.3px;
+    }
+
+    .topbar-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--border-medium);
+    }
+
+    .topbar-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      letter-spacing: 0.02em;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .topbar-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      transition: color 0.2s;
+    }
+    .topbar-link:hover { color: var(--text-primary); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+      z-index: 300;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--text-secondary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ===================================================================
+       Layout Shell
+       =================================================================== */
+
+    .layout {
+      display: flex;
+      padding-top: var(--topbar-height);
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===================================================================
+       Sidebar
+       =================================================================== */
+
+    .sidebar {
+      position: fixed;
+      top: var(--topbar-height);
+      left: 0;
+      bottom: 0;
+      width: var(--sidebar-width);
+      background: rgba(28, 26, 36, 0.72);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border-right: var(--glass-border);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 28px 0 48px;
+      z-index: 100;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb {
+      background: rgba(123, 107, 170, 0.25);
+      border-radius: 4px;
+    }
+
+    .sidebar-group {
+      margin-bottom: 8px;
+    }
+
+    .sidebar-group-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      padding: 0 20px 8px;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 20px;
+      font-size: 13.5px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: color 0.18s, background 0.18s;
+      border-left: 2px solid transparent;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .sidebar-item:hover {
+      color: var(--text-primary);
+      background: rgba(123, 107, 170, 0.07);
+    }
+
+    .sidebar-item.active {
+      color: var(--indigo-light);
+      font-weight: 500;
+      border-left-color: var(--indigo);
+      background: rgba(123, 107, 170, 0.10);
+    }
+
+    .sidebar-item .item-icon {
+      font-size: 15px;
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .sidebar-sub {
+      padding-left: 50px;
+      display: none;
+    }
+    .sidebar-sub.open { display: block; }
+
+    .sidebar-sub-item {
+      display: block;
+      padding: 5px 20px 5px 0;
+      font-size: 12.5px;
+      color: var(--text-tertiary);
+      transition: color 0.18s;
+      text-decoration: none;
+    }
+    .sidebar-sub-item:hover { color: var(--text-secondary); }
+    .sidebar-sub-item.active { color: var(--indigo-light); }
+
+    .sidebar-sep {
+      height: 1px;
+      background: var(--border-subtle);
+      margin: 12px 20px;
+    }
+
+    /* Sidebar overlay (mobile) */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 99;
+      backdrop-filter: blur(2px);
+    }
+    .sidebar-overlay.visible { display: block; }
+
+    /* ===================================================================
+       Main Content
+       =================================================================== */
+
+    .main {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      min-width: 0;
+      padding: 48px 48px 120px;
+    }
+
+    .content-wrap {
+      max-width: var(--content-max);
+      margin: 0 auto;
+    }
+
+    /* ===================================================================
+       Page Hero
+       =================================================================== */
+
+    .page-hero {
+      margin-bottom: 56px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .page-hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(212, 168, 84, 0.10);
+      border: 1px solid var(--border-gold);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .page-hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .page-hero p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* ===================================================================
+       Sections
+       =================================================================== */
+
+    .guide-section {
+      margin-bottom: 72px;
+      scroll-margin-top: 88px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .section-icon-wrap {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: rgba(123, 107, 170, 0.12);
+      border: 1px solid var(--border-indigo);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .section-title-group {}
+
+    .section-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(212, 168, 84, 0.10);
+      border: 1px solid var(--border-gold);
+      border-radius: 100px;
+      padding: 3px 10px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .section-intro {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      line-height: 1.75;
+    }
+
+    /* ===================================================================
+       Subsections / Accordion
+       =================================================================== */
+
+    .subsection {
+      margin-bottom: 16px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      overflow: hidden;
+    }
+
+    .subsection-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 22px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.18s;
+    }
+
+    .subsection-toggle:hover {
+      background: rgba(123, 107, 170, 0.06);
+    }
+
+    .subsection-toggle-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .subsection-toggle-icon {
+      font-size: 16px;
+    }
+
+    .subsection-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .subsection-chevron {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      transition: transform 0.25s;
+    }
+
+    .subsection.open .subsection-chevron {
+      transform: rotate(180deg);
+    }
+
+    .subsection-body {
+      display: none;
+      padding: 0 22px 22px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .subsection.open .subsection-body {
+      display: block;
+    }
+
+    /* ===================================================================
+       Content Elements
+       =================================================================== */
+
+    .prose p {
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.78;
+      margin-bottom: 14px;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+
+    /* Numbered steps */
+    .steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .steps li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: rgba(123, 107, 170, 0.18);
+      border: 1px solid var(--border-indigo);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--indigo-light);
+      margin-top: 1px;
+    }
+
+    .step-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      padding-top: 3px;
+    }
+
+    .step-text strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Bullet list */
+    .bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .bullets li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .bullets li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--indigo);
+      margin-top: 9px;
+    }
+
+    /* Callout boxes */
+    .callout {
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      margin: 18px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .callout-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .callout-text { flex: 1; }
+    .callout-text strong {
+      display: block;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .callout.tip {
+      background: rgba(123, 107, 170, 0.10);
+      border: 1px solid var(--border-indigo);
+      color: var(--text-secondary);
+    }
+    .callout.tip strong { color: var(--indigo-light); }
+
+    .callout.warn {
+      background: rgba(212, 168, 84, 0.08);
+      border: 1px solid var(--border-gold);
+      color: var(--text-secondary);
+    }
+    .callout.warn strong { color: var(--gold-light); }
+
+    .callout.premium {
+      background: linear-gradient(135deg, rgba(123, 107, 170, 0.12), rgba(212, 168, 84, 0.06));
+      border: 1px solid rgba(212, 168, 84, 0.22);
+      color: var(--text-secondary);
+    }
+    .callout.premium strong { color: var(--gold); }
+
+    .callout.danger {
+      background: rgba(200, 80, 80, 0.08);
+      border: 1px solid rgba(200, 80, 80, 0.22);
+      color: var(--text-secondary);
+    }
+    .callout.danger strong { color: #E08080; }
+
+    /* Premium badge */
+    .badge-premium {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: linear-gradient(135deg, rgba(91, 74, 138, 0.25), rgba(212, 168, 84, 0.15));
+      border: 1px solid rgba(212, 168, 84, 0.35);
+      border-radius: 100px;
+      padding: 2px 9px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+
+    /* Info grid */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .info-card {
+      background: rgba(37, 34, 48, 0.50);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+
+    .info-card-icon {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .info-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .info-card-desc {
+      font-size: 12.5px;
+      color: var(--text-tertiary);
+      line-height: 1.55;
+    }
+
+    /* Feature table */
+    .feature-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .feature-table th {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      border-bottom: 1px solid var(--border-medium);
+    }
+
+    .feature-table td {
+      padding: 11px 14px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .feature-table tr:last-child td { border-bottom: none; }
+
+    .feature-table .check-free { color: var(--text-secondary); }
+    .feature-table .check-premium { color: var(--gold); font-weight: 600; }
+    .feature-table .check-no { color: var(--text-tertiary); }
+
+    .feature-table th:not(:first-child),
+    .feature-table td:not(:first-child) {
+      text-align: center;
+    }
+
+    /* Code / keyboard */
+    code {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12.5px;
+      background: rgba(123, 107, 170, 0.12);
+      border: 1px solid var(--border-indigo);
+      border-radius: 5px;
+      padding: 1px 7px;
+      color: var(--indigo-light);
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border-subtle);
+      margin: 40px 0;
+    }
+
+    /* ===================================================================
+       Back to Top
+       =================================================================== */
+
+    .back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(37, 34, 48, 0.85);
+      border: 1px solid var(--border-medium);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--text-secondary);
+      z-index: 150;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s, transform 0.25s, color 0.2s, border-color 0.2s;
+      pointer-events: none;
+      text-decoration: none;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    .back-to-top:hover {
+      color: var(--indigo-light);
+      border-color: var(--border-indigo);
+    }
+
+    /* ===================================================================
+       Responsive
+       =================================================================== */
+
+    @media (max-width: 900px) {
+      .sidebar {
+        transform: translateX(-100%);
+        z-index: 200;
+      }
+
+      .sidebar.mobile-open {
+        transform: translateX(0);
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 28px 20px 80px;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .topbar-label {
+        display: none;
+      }
+
+      .topbar-divider {
+        display: none;
+      }
+
+      .back-to-top {
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      html {
+        scroll-padding-top: 80px;
+      }
+
+      .page-hero h1 {
+        font-size: 28px;
+      }
+
+      .section-title {
+        font-size: 20px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-link {
+        display: none;
+      }
+    }
+
+    /* ===================================================================
+       Mood scale visual
+       =================================================================== */
+
+    .mood-scale {
+      display: flex;
+      gap: 8px;
+      margin: 14px 0;
+      flex-wrap: wrap;
+    }
+
+    .mood-chip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      background: rgba(37, 34, 48, 0.60);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 10px 14px;
+      min-width: 70px;
+      flex: 1;
+    }
+
+    .mood-chip-emoji { font-size: 20px; }
+
+    .mood-chip-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin: 2px 0;
+    }
+
+    .mood-chip-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+    }
+
+    /* Tab bar visual */
+    .tab-bar-demo {
+      display: flex;
+      background: rgba(37, 34, 48, 0.75);
+      border: 1px solid var(--border-medium);
+      border-radius: 20px;
+      padding: 8px 12px;
+      gap: 4px;
+      align-items: center;
+      justify-content: space-around;
+      margin: 18px 0;
+      max-width: 340px;
+    }
+
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      padding: 6px 14px;
+      border-radius: 12px;
+      transition: background 0.18s;
+      cursor: default;
+    }
+
+    .tab-item.active {
+      background: rgba(123, 107, 170, 0.15);
+    }
+
+    .tab-item-icon { font-size: 18px; }
+
+    .tab-item-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+    }
+
+    .tab-item.active .tab-item-label {
+      color: var(--indigo-light);
+    }
+
+    .tab-compose {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--indigo-dark), var(--indigo));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 4px 20px rgba(91, 74, 138, 0.45);
+      flex-shrink: 0;
+    }
+
+    /* Template pill demos */
+    .template-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .template-pill {
+      background: rgba(37, 34, 48, 0.60);
+      border: 1px solid var(--border-subtle);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 12.5px;
+      color: var(--text-secondary);
+    }
+
+    .template-pill.system {
+      border-color: var(--border-indigo);
+      color: var(--indigo-light);
+      background: rgba(123, 107, 170, 0.08);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Floating orbs -->
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+  <div class="orb orb-3" aria-hidden="true"></div>
+  <div class="orb orb-4" aria-hidden="true"></div>
+  <div class="orb orb-5" aria-hidden="true"></div>
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="../" class="topbar-brand">
+        <img src="../app-icon.png" alt="Inwardly" class="topbar-icon">
+        <span class="topbar-wordmark">inwardly</span>
+      </a>
+      <div class="topbar-divider"></div>
+      <span class="topbar-label">User Guide</span>
+    </div>
+    <div class="topbar-right">
+      <a href="../" class="topbar-link">Back to site</a>
+      <a href="mailto:support@goinwardly.app" class="topbar-link">Support</a>
+    </div>
+  </header>
+
+  <!-- Sidebar overlay (mobile) -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- Layout -->
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Overview</div>
+        <a href="#getting-started" class="sidebar-item" data-section="getting-started">
+          <span class="item-icon">🚀</span> Getting Started
+        </a>
+        <a href="#writing-entries" class="sidebar-item" data-section="writing-entries">
+          <span class="item-icon">✏️</span> Writing Entries
+        </a>
+        <a href="#managing-journal" class="sidebar-item" data-section="managing-journal">
+          <span class="item-icon">📋</span> Managing Your Journal
+        </a>
+      </div>
+
+      <div class="sidebar-sep"></div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Features</div>
+        <a href="#home-screen" class="sidebar-item" data-section="home-screen">
+          <span class="item-icon">🏠</span> Home Screen
+        </a>
+        <a href="#ai-insights" class="sidebar-item" data-section="ai-insights">
+          <span class="item-icon">✨</span> AI Insights
+        </a>
+        <a href="#journals-org" class="sidebar-item" data-section="journals-org">
+          <span class="item-icon">📚</span> Journals &amp; Organization
+        </a>
+        <a href="#templates" class="sidebar-item" data-section="templates">
+          <span class="item-icon">🗂️</span> Templates
+        </a>
+      </div>
+
+      <div class="sidebar-sep"></div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Privacy &amp; Account</div>
+        <a href="#privacy-encryption" class="sidebar-item" data-section="privacy-encryption">
+          <span class="item-icon">🔒</span> Privacy &amp; Encryption
+        </a>
+        <a href="#premium" class="sidebar-item" data-section="premium">
+          <span class="item-icon">⭐</span> Inwardly+
+        </a>
+        <a href="#settings" class="sidebar-item" data-section="settings">
+          <span class="item-icon">⚙️</span> Settings
+        </a>
+        <a href="#data-export" class="sidebar-item" data-section="data-export">
+          <span class="item-icon">📤</span> Data Export
+        </a>
+      </div>
+
+      <div class="sidebar-sep"></div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Help</div>
+        <a href="#troubleshooting" class="sidebar-item" data-section="troubleshooting">
+          <span class="item-icon">🔧</span> Troubleshooting
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="main">
+      <div class="content-wrap">
+
+        <!-- Page hero -->
+        <div class="page-hero">
+          <div class="page-hero-label">&#9733; Complete Guide</div>
+          <h1>Inwardly User Guide</h1>
+          <p>Everything you need to know about using Inwardly — your private, AI-powered journal. From your first entry to unlocking deep personal insights.</p>
+        </div>
+
+        <!-- ============================================================
+             1. GETTING STARTED
+             ============================================================ -->
+        <section class="guide-section" id="getting-started">
+          <div class="section-header">
+            <div class="section-icon-wrap">🚀</div>
+            <div class="section-title-group">
+              <div class="section-pill">Section 01</div>
+              <h2 class="section-title">Getting Started</h2>
+            </div>
+          </div>
+
+          <p class="section-intro">Welcome to Inwardly. Getting set up takes less than two minutes. Here is everything that happens from the moment you open the app for the first time.</p>
+
+          <div class="subsection open" id="sub-account">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">👤</span>
+                <span class="subsection-title">Creating your account</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>When you first launch Inwardly, you will be taken to the sign-up screen. You have three ways to create an account:</p>
+              </div>
+              <div class="info-grid">
+                <div class="info-card">
+                  <div class="info-card-icon">✉️</div>
+                  <div class="info-card-title">Email &amp; Password</div>
+                  <div class="info-card-desc">Enter your email address and choose a secure password. You will receive a confirmation email from noreply@goinwardly.app.</div>
+                </div>
+                <div class="info-card">
+                  <div class="info-card-icon"></div>
+                  <div class="info-card-title">Sign in with Apple</div>
+                  <div class="info-card-desc">One tap using your Apple ID. Your email can be hidden using Apple's private relay feature.</div>
+                </div>
+                <div class="info-card">
+                  <div class="info-card-icon">G</div>
+                  <div class="info-card-title">Sign in with Google</div>
+                  <div class="info-card-desc">Connect your Google account for quick, passwordless sign-in on any device.</div>
+                </div>
+              </div>
+              <div class="callout tip">
+                <span class="callout-icon">💡</span>
+                <div class="callout-text">
+                  <strong>Already have an account?</strong>
+                  Tap "Sign in" at the bottom of the sign-up screen to switch to the sign-in form. Forgot your password? Tap "Forgot password" on the sign-in screen and we will email you a reset link.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection" id="sub-onboarding">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">📖</span>
+                <span class="subsection-title">Completing onboarding</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>After creating your account, Inwardly walks you through a short onboarding flow — three screens that take about 30 seconds.</p>
+              </div>
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span class="step-text"><strong>Privacy first.</strong> This screen explains that your journal entries are encrypted on your device before they are stored. No one — including the Inwardly team — can read your entries. Tap "I understand" to continue.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span class="step-text"><strong>Building your habit.</strong> A few tips on how to make journaling stick: write at the same time each day, keep entries honest rather than polished, and aim for consistency over length. Tap "Sounds good" to continue.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span class="step-text"><strong>Reminder notifications.</strong> Inwardly asks if it can send you a daily reminder to write. You can choose a time that suits your routine, or skip this step entirely and enable notifications later in Settings.</span>
+                </li>
+              </ol>
+              <div class="callout tip">
+                <span class="callout-icon">💡</span>
+                <div class="callout-text">
+                  <strong>You can revisit all of this later.</strong>
+                  Notification time and permission can be changed any time in Settings &rarr; Notifications.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection" id="sub-tabbar">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🗂️</span>
+                <span class="subsection-title">Understanding the tab bar</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Once you are in the app, the bottom tab bar is your primary navigation. It has five items:</p>
+              </div>
+
+              <div class="tab-bar-demo">
+                <div class="tab-item active">
+                  <span class="tab-item-icon">🏠</span>
+                  <span class="tab-item-label">Home</span>
+                </div>
+                <div class="tab-item">
+                  <span class="tab-item-icon">📋</span>
+                  <span class="tab-item-label">Journal</span>
+                </div>
+                <div class="tab-compose">✏️</div>
+                <div class="tab-item">
+                  <span class="tab-item-icon">✨</span>
+                  <span class="tab-item-label">Insights</span>
+                </div>
+                <div class="tab-item">
+                  <span class="tab-item-icon">⚙️</span>
+                  <span class="tab-item-label">Settings</span>
+                </div>
+              </div>
+
+              <ul class="bullets">
+                <li><strong style="color:var(--text-primary)">Home</strong> — Your daily dashboard. Shows your streak, today's writing prompt, recent entries, and AI highlights.</li>
+                <li><strong style="color:var(--text-primary)">Journal</strong> — A chronological list of all your entries. Switch to calendar view to browse by date.</li>
+                <li><strong style="color:var(--text-primary)">Compose (center pill)</strong> — The glowing circular button in the centre. Tap it to start a new journal entry from anywhere in the app.</li>
+                <li><strong style="color:var(--text-primary)">Insights</strong> — Your AI-powered emotional dashboard. Weekly reviews, pattern detection, and mood analytics.</li>
+                <li><strong style="color:var(--text-primary)">Settings</strong> — Account, notifications, appearance, privacy, and subscription management.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             2. WRITING JOURNAL ENTRIES
+             ============================================================ -->
+        <section class="guide-section" id="writing-entries">
+          <div class="section-header">
+            <div class="section-icon-wrap">✏️</div>
+            <div class="section-title-group">
+              <div class="section-pill">Section 02</div>
+              <h2 class="section-title">Writing Journal Entries</h2>
+            </div>
+          </div>
+
+          <p class="section-intro">Every entry starts with a single tap. Inwardly gets out of your way so you can focus on what matters: writing.</p>
+
+          <div class="subsection open">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">✍️</span>
+                <span class="subsection-title">Starting a new entry</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span class="step-text">Tap the <strong>glowing circular button</strong> in the centre of the tab bar, or tap <strong>"Write Today's Entry"</strong> on the Home screen.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span class="step-text">The new entry screen slides up as a modal. The date and time are set automatically.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span class="step-text">You will see a <strong>writing prompt</strong> at the top — a question or idea to get you started. You can ignore it and write freely, or let it guide you.</span>
+                </li>
+                <li>
+                  <span class="step-num">4</span>
+                  <span class="step-text">Tap the <strong>text area</strong> below the prompt and your keyboard appears. Start typing. There is no minimum length requirement.</span>
+                </li>
+                <li>
+                  <span class="step-num">5</span>
+                  <span class="step-text">When you are done, tap <strong>Save</strong> in the top-right corner. To discard without saving, tap <strong>Cancel</strong> in the top-left.</span>
+                </li>
+              </ol>
+              <div class="callout tip">
+                <span class="callout-icon">💡</span>
+                <div class="callout-text">
+                  <strong>Word count.</strong>
+                  A live word count appears as you type so you always know how much you have written.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">😊</span>
+                <span class="subsection-title">Selecting your mood</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Below the text area you will find the mood selector. Tap one of the five options to log how you are feeling today. This data feeds the mood charts in your Insights tab over time.</p>
+              </div>
+              <div class="mood-scale">
+                <div class="mood-chip">
+                  <span class="mood-chip-emoji">😔</span>
+                  <div class="mood-chip-dot" style="background:#9B7FAA;"></div>
+                  <span class="mood-chip-label">Rough</span>
+                </div>
+                <div class="mood-chip">
+                  <span class="mood-chip-emoji">😕</span>
+                  <div class="mood-chip-dot" style="background:#7A93B8;"></div>
+                  <span class="mood-chip-label">Low</span>
+                </div>
+                <div class="mood-chip">
+                  <span class="mood-chip-emoji">😐</span>
+                  <div class="mood-chip-dot" style="background:#7BA88A;"></div>
+                  <span class="mood-chip-label">Okay</span>
+                </div>
+                <div class="mood-chip">
+                  <span class="mood-chip-emoji">🙂</span>
+                  <div class="mood-chip-dot" style="background:#D4A854;"></div>
+                  <span class="mood-chip-label">Good</span>
+                </div>
+                <div class="mood-chip">
+                  <span class="mood-chip-emoji">😄</span>
+                  <div class="mood-chip-dot" style="background:#E08070;"></div>
+                  <span class="mood-chip-label">Great</span>
+                </div>
+              </div>
+              <div class="prose">
+                <p>Mood is optional — you can save an entry without selecting one. However, selecting a mood each time gives the AI much more to work with when generating your Insights.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">📍</span>
+                <span class="subsection-title">Adding a location tag <span class="badge-premium">Inwardly+</span></span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Premium users can tag their entries with the location where they were written. This lets you look back and see that you wrote your best entries from the coffee shop on Saturdays, or that your mood dips when you are travelling for work.</p>
+              </div>
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span class="step-text">In the entry toolbar at the bottom of the screen, tap the <strong>location pin icon</strong>.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span class="step-text">Inwardly will request location permission if it has not already been granted. Tap <strong>Allow While Using App</strong>.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span class="step-text">Your current city and neighbourhood appear as a tag beneath the mood selector. Tap it again to remove it.</span>
+                </li>
+              </ol>
+              <div class="callout tip">
+                <span class="callout-icon">💡</span>
+                <div class="callout-text">
+                  <strong>Location is approximate.</strong>
+                  We only store city-level location data — never your precise GPS coordinates.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">📷</span>
+                <span class="subsection-title">Attaching photos <span class="badge-premium">Inwardly+</span></span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Premium users can attach up to three photos per entry. Photos are stored securely alongside your encrypted text.</p>
+              </div>
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span class="step-text">Tap the <strong>photo icon</strong> in the entry toolbar.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span class="step-text">Choose from your <strong>Photo Library</strong> or take a new photo with your <strong>Camera</strong>.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span class="step-text">Selected photos appear as thumbnails in the entry. Tap a thumbnail to remove it.</span>
+                </li>
+              </ol>
+              <div class="callout warn">
+                <span class="callout-icon">⚠️</span>
+                <div class="callout-text">
+                  <strong>Up to 3 photos per entry.</strong>
+                  Attempting to add a fourth photo will show a notice. Each photo is stored at display resolution to keep your storage usage reasonable.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🗂️</span>
+                <span class="subsection-title">Using journal templates</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Templates are structured starting points that guide your writing with a set of fields or prompts. They are great for routines like a morning reflection or a weekly review.</p>
+              </div>
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span class="step-text">Tap the <strong>template icon</strong> (grid icon) in the entry toolbar.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span class="step-text">A picker slides up showing all available templates — system templates are listed first, followed by any custom templates you have created.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span class="step-text">Tap a template to select it. The entry area transforms to show the template's structured fields.</span>
+                </li>
+                <li>
+                  <span class="step-num">4</span>
+                  <span class="step-text">Fill in each field at your own pace. When you save, all fields are combined into a single entry.</span>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             3. MANAGING YOUR JOURNAL
+             ============================================================ -->
+        <section class="guide-section" id="managing-journal">
+          <div class="section-header">
+            <div class="section-icon-wrap">📋</div>
+            <div class="section-title-group">
+              <div class="section-pill">Section 03</div>
+              <h2 class="section-title">Managing Your Journal</h2>
+            </div>
+          </div>
+
+          <p class="section-intro">The Journal tab is where all your entries live. Browse, filter, search, edit, and delete — everything you need to manage your writing over time.</p>
+
+          <div class="subsection open">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">📄</span>
+                <span class="subsection-title">The journal list view</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Tap the <strong>Journal</strong> tab to see all your entries. They are grouped by month, with the most recent month at the top. Each entry card shows:</p>
+              </div>
+              <ul class="bullets">
+                <li>The date and time the entry was written</li>
+                <li>Your mood emoji for that entry (if selected)</li>
+                <li>A preview of the first line of the entry</li>
+                <li>The journal it belongs to (if you use multiple journals)</li>
+                <li>A photo thumbnail if photos were attached</li>
+              </ul>
+              <div class="prose">
+                <p>Tap any entry card to open and read the full entry.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">📅</span>
+                <span class="subsection-title">List view vs. Calendar view</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>In the top-right of the Journal screen you will find a toggle to switch between <strong>List</strong> and <strong>Calendar</strong> views.</p>
+              </div>
+              <ul class="bullets">
+                <li><strong style="color:var(--text-primary)">List view</strong> — A chronological feed of all entries grouped by month. Ideal for reading and browsing recent writing.</li>
+                <li><strong style="color:var(--text-primary)">Calendar view</strong> — A monthly calendar grid where each day with an entry shows a small dot. Tap any date to open a panel showing all entries written on that day. Great for finding entries by date or checking your writing consistency.</li>
+              </ul>
+              <div class="callout tip">
+                <span class="callout-icon">💡</span>
+                <div class="callout-text">
+                  <strong>Multiple entries on one day.</strong>
+                  In Calendar view, tapping a date with multiple entries shows a scrollable panel with all of them — helpful if you write more than once a day.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🔍</span>
+                <span class="subsection-title">Filtering by journal</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>If you have created multiple journals (for example, a personal journal and a work journal), pill-shaped filter buttons appear at the top of the journal list. Tap a pill to show only entries from that journal. Tap <strong>All</strong> to show everything.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">✏️</span>
+                <span class="subsection-title">Editing an existing entry</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span class="step-text">Tap an entry card to open it in the detail view.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span class="step-text">Tap the <strong>pencil icon</strong> in the top-right corner to enter edit mode.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span class="step-text">Make your changes. The mood selector and toolbar are available just as they are when writing a new entry.</span>
+                </li>
+                <li>
+                  <span class="step-num">4</span>
+                  <span class="step-text">Tap <strong>Save</strong> to keep your changes, or <strong>Cancel</strong> to discard them.</span>
+                </li>
+              </ol>
+              <div class="callout tip">
+                <span class="callout-icon">💡</span>
+                <div class="callout-text">
+                  <strong>Sharing an entry.</strong>
+                  While viewing an entry (not editing), tap the share icon in the top-right to share the text via iOS share sheet — send it to Notes, Mail, or copy it to the clipboard.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🗑️</span>
+                <span class="subsection-title">Deleting an entry</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span class="step-text">Open the entry you want to delete.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span class="step-text">Tap the <strong>three-dot menu</strong> icon in the top-right corner.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span class="step-text">Select <strong>Delete Entry</strong> from the action sheet.</span>
+                </li>
+                <li>
+                  <span class="step-num">4</span>
+                  <span class="step-text">Confirm deletion in the confirmation prompt. This action cannot be undone.</span>
+                </li>
+              </ol>
+              <div class="callout warn">
+                <span class="callout-icon">⚠️</span>
+                <div class="callout-text">
+                  <strong>Deletion is permanent.</strong>
+                  Once an entry is deleted, it is removed from the server and cannot be recovered. If you want to keep a copy, export your data first (Settings &rarr; Export My Data).
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             4. HOME SCREEN
+             ============================================================ -->
+        <section class="guide-section" id="home-screen">
+          <div class="section-header">
+            <div class="section-icon-wrap">🏠</div>
+            <div class="section-title-group">
+              <div class="section-pill">Section 04</div>
+              <h2 class="section-title">Home Screen</h2>
+            </div>
+          </div>
+
+          <p class="section-intro">The Home screen is your daily starting point. It is personalised to you and updates as you write more entries.</p>
+
+          <div class="subsection open">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">👋</span>
+                <span class="subsection-title">Personalised greeting</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>At the top of the Home screen you will see a greeting that changes based on the time of day — "Good morning", "Good afternoon", or "Good evening" — along with your display name and today's date. This is a small but intentional detail: the app knows what time it is for you.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🔥</span>
+                <span class="subsection-title">Streak counter and stats</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Beneath the greeting sits a stats card showing two numbers:</p>
+              </div>
+              <ul class="bullets">
+                <li><strong style="color:var(--text-primary)">Current streak</strong> — The number of consecutive calendar days on which you have written at least one entry. A flame icon accompanies this. The streak resets if you miss a full day.</li>
+                <li><strong style="color:var(--text-primary)">Total entries</strong> — The cumulative count of all entries you have ever written in Inwardly.</li>
+              </ul>
+              <div class="callout tip">
+                <span class="callout-icon">💡</span>
+                <div class="callout-text">
+                  <strong>Streak tip.</strong>
+                  Streaks reset at midnight in your local timezone. Writing once before midnight — even a single sentence — keeps your streak alive.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">💬</span>
+                <span class="subsection-title">Today's prompt</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>The Prompt Card in the middle of the Home screen shows today's writing prompt. It is designed to help you start — not to dictate what you write.</p>
+                <p>For free users, prompts are thoughtfully curated and change daily. For Inwardly+ subscribers, the AI generates a personalised prompt based on your recent entries and emotional patterns — it might reference something you wrote last week, or gently revisit a theme that has come up repeatedly.</p>
+                <p>Tap <strong>"Write Today's Entry"</strong> below the prompt card to open the new entry screen with the prompt already visible.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">📅</span>
+                <span class="subsection-title">This Month highlights</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>The lower portion of the Home screen shows a <strong>"This Month"</strong> section — a scrollable horizontal row of recent entry cards. Each card shows the date, mood, and a snippet of the entry. Tap any card to read the full entry.</p>
+                <p>If you have not written this month yet, the section shows an encouraging nudge instead.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🗓️</span>
+                <span class="subsection-title">"On this day" card</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Once you have been using Inwardly for more than a year, a special card appears on the Home screen when you have written an entry on this same calendar date in a previous year. It shows a preview of what you were thinking and feeling exactly one year ago (or more).</p>
+                <p>This is one of the most personally meaningful features of the app — seeing your own growth in your own words.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🔑</span>
+                <span class="subsection-title">"Protect your journal" nudge</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>After you write your first entry, a card appears on the Home screen encouraging you to set up a recovery passphrase. This ensures that if you ever switch to a new phone or reinstall the app, you can recover access to your encrypted entries.</p>
+                <p>Tap <strong>"Set up"</strong> to create your passphrase now. Tap the link below it if you are signing in on a new device and need to restore your key from a previous backup.</p>
+                <p>This nudge disappears once you have set up a recovery passphrase.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             5. AI INSIGHTS
+             ============================================================ -->
+        <section class="guide-section" id="ai-insights">
+          <div class="section-header">
+            <div class="section-icon-wrap">✨</div>
+            <div class="section-title-group">
+              <div class="section-pill">Section 05</div>
+              <h2 class="section-title">AI Insights <span class="badge-premium">Inwardly+</span></h2>
+            </div>
+          </div>
+
+          <p class="section-intro">The Insights tab is where Inwardly transforms your writing into self-understanding. It takes time to build — but it becomes one of the most powerful parts of the app.</p>
+
+          <div class="callout premium">
+            <span class="callout-icon">⭐</span>
+            <div class="callout-text">
+              <strong>Inwardly+ required.</strong>
+              All AI Insights features require an active Inwardly+ subscription. Free users can preview the Insights tab but must subscribe to access their data. Start a 7-day free trial from the paywall screen.
+            </div>
+          </div>
+
+          <div class="callout warn">
+            <span class="callout-icon">📊</span>
+            <div class="callout-text">
+              <strong>10 entries needed to activate.</strong>
+              Pattern detection and AI analysis require at least 10 journal entries before they can surface meaningful insights. The Insights tab will show a progress indicator until this threshold is reached.
+            </div>
+          </div>
+
+          <div class="subsection open">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">📊</span>
+                <span class="subsection-title">YOUR MOOD — mood chart and stats</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>The first section of the Insights tab is your mood chart. It plots your mood scores (1–5) over time as a smooth line graph. Use the toggle above the chart to switch between <strong>7 days</strong>, <strong>14 days</strong>, and <strong>30 days</strong>.</p>
+                <p>Below the chart, four stat boxes give you a quick summary of the selected period:</p>
+              </div>
+              <ul class="bullets">
+                <li><strong style="color:var(--text-primary)">Avg mood</strong> — Your average mood score across all entries in the selected window</li>
+                <li><strong style="color:var(--text-primary)">Most common</strong> — The mood you selected most often (e.g., "Good")</li>
+                <li><strong style="color:var(--text-primary)">Range</strong> — The spread between your lowest and highest mood entries (e.g., "Rough → Great")</li>
+                <li><strong style="color:var(--text-primary)">Entries</strong> — How many entries were written in the selected period</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">📝</span>
+                <span class="subsection-title">THIS WEEK — weekly AI review</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Every week, Inwardly's AI reads your entries from the past 7 days and writes a short, warm reflection on your week. This is not a summary of what happened — it is an observation of how you seemed to be feeling, what themes came up, and what might be worth paying attention to.</p>
+                <p>Think of it as a thoughtful friend who read your diary and gently reflected it back to you.</p>
+                <p>The weekly review refreshes automatically. If you write more entries after it was generated, you can regenerate it using the on-demand review button.</p>
+              </div>
+              <div class="callout tip">
+                <span class="callout-icon">💡</span>
+                <div class="callout-text">
+                  <strong>Example weekly review tone.</strong>
+                  "This week had some real weight to it. You mentioned feeling stretched thin on Tuesday and Thursday — and both times, it seemed to come back to feeling like you could not get ahead. But Friday felt different. Something shifted. What do you think changed?"
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🔍</span>
+                <span class="subsection-title">PATTERNS — emotional pattern detection</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>The Patterns section surfaces recurring themes and emotional triggers that appear across your entries over time. These are things you might not notice day to day — but the AI can see them across weeks and months of writing.</p>
+                <p>Examples of patterns Inwardly might detect:</p>
+              </div>
+              <ul class="bullets">
+                <li>"You tend to feel anxious on Sunday evenings."</li>
+                <li>"Your mood improves significantly on days you mention exercise or being outside."</li>
+                <li>"You have written about feeling underappreciated at work three times in the past month."</li>
+                <li>"Your best entries tend to be written on weekday mornings."</li>
+              </ul>
+              <div class="prose">
+                <p>Each pattern is presented as a short, compassionate observation — not a diagnosis. The AI is noticing, not prescribing.</p>
+                <p>Patterns require at least 10 entries to activate and become richer the longer you use the app.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">⚡</span>
+                <span class="subsection-title">ON-DEMAND REVIEW — generate a review now</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Do not want to wait for the automatic weekly review? The On-Demand Review section lets you generate a review of any period whenever you want.</p>
+              </div>
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span class="step-text">Scroll to the <strong>ON-DEMAND REVIEW</strong> section in the Insights tab.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span class="step-text">Choose your timeframe: <strong>Past week</strong> or <strong>Past month</strong>.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span class="step-text">Tap <strong>Generate Review</strong>. The AI reads your entries and writes a personalised reflection. This takes 5–15 seconds.</span>
+                </li>
+                <li>
+                  <span class="step-num">4</span>
+                  <span class="step-text">Read your review. You can generate a new one at any time.</span>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">📅</span>
+                <span class="subsection-title">Monthly emotional trend reports</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Once per month, Inwardly generates a longer, more in-depth Monthly Report — a written summary of your entire emotional journey over the past 30 days. It highlights growth moments, recurring struggles, wins worth celebrating, and threads worth exploring going forward.</p>
+                <p>Access your Monthly Report from a card on the Home screen, or navigate to it via the Report screen (tap the card in the Home screen "This Month" section).</p>
+                <p>Monthly reports are warm, coach-like, and personal. They are written in a narrative style, not bullet points.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             6. JOURNALS & ORGANIZATION
+             ============================================================ -->
+        <section class="guide-section" id="journals-org">
+          <div class="section-header">
+            <div class="section-icon-wrap">📚</div>
+            <div class="section-title-group">
+              <div class="section-pill">Section 06</div>
+              <h2 class="section-title">Journals &amp; Organization</h2>
+            </div>
+          </div>
+
+          <p class="section-intro">You can keep all your entries in one journal, or create separate journals for different areas of your life — a personal journal, a work journal, a travel journal, or whatever makes sense for you.</p>
+
+          <div class="callout premium">
+            <span class="callout-icon">⭐</span>
+            <div class="callout-text">
+              <strong>Multiple journals require Inwardly+.</strong>
+              Free users have one default journal. Inwardly+ subscribers can create unlimited journals.
+            </div>
+          </div>
+
+          <div class="subsection open">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">📗</span>
+                <span class="subsection-title">Creating a new journal</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span class="step-text">Go to the <strong>Journal</strong> tab.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span class="step-text">Tap the <strong>+ button</strong> next to the journal filter pills at the top of the screen.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span class="step-text">Enter a name for your new journal (for example, "Work", "Travel", or "Morning Pages").</span>
+                </li>
+                <li>
+                  <span class="step-num">4</span>
+                  <span class="step-text">Tap <strong>Create</strong>. The new journal appears as a filter pill at the top of the journal list.</span>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🏷️</span>
+                <span class="subsection-title">Assigning entries to a journal</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>When writing a new entry, a <strong>journal picker</strong> appears in the toolbar at the bottom of the entry screen. Tap it to select which journal this entry belongs to. Your most recently used journal is selected by default.</p>
+                <p>You can also reassign an existing entry to a different journal by opening the entry, entering edit mode, and changing the journal picker selection.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">⚙️</span>
+                <span class="subsection-title">Renaming and managing journals</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Journal management is available in <strong>Settings</strong>. From there you can rename journals or delete empty journals. Deleting a journal that contains entries will prompt you to reassign those entries first.</p>
+              </div>
+              <div class="callout warn">
+                <span class="callout-icon">⚠️</span>
+                <div class="callout-text">
+                  <strong>Deleting a journal does not delete your entries.</strong>
+                  Entries from a deleted journal are moved to your default journal.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             7. TEMPLATES
+             ============================================================ -->
+        <section class="guide-section" id="templates">
+          <div class="section-header">
+            <div class="section-icon-wrap">🗂️</div>
+            <div class="section-title-group">
+              <div class="section-pill">Section 07</div>
+              <h2 class="section-title">Templates</h2>
+            </div>
+          </div>
+
+          <p class="section-intro">Templates give your journaling sessions structure. Instead of staring at a blank page, you start with a set of questions or fields that guide your writing.</p>
+
+          <div class="subsection open">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">📋</span>
+                <span class="subsection-title">Built-in system templates</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Inwardly ships with six built-in templates, ready to use immediately:</p>
+              </div>
+
+              <div class="template-list">
+                <div class="template-pill system">🌅 Morning Reflection</div>
+                <div class="template-pill system">🙏 Gratitude</div>
+                <div class="template-pill system">📆 Weekly Review</div>
+                <div class="template-pill system">😌 Mood Check-in</div>
+                <div class="template-pill system">🎯 Goal Setting</div>
+                <div class="template-pill system">✍️ Free Write</div>
+              </div>
+
+              <ul class="bullets">
+                <li><strong style="color:var(--text-primary)">Morning Reflection</strong> — How are you feeling? What are your intentions for today? What are you looking forward to?</li>
+                <li><strong style="color:var(--text-primary)">Gratitude</strong> — Three things you are grateful for today, and why one of them matters more than usual.</li>
+                <li><strong style="color:var(--text-primary)">Weekly Review</strong> — Wins from the week, challenges faced, and what you want to carry into next week.</li>
+                <li><strong style="color:var(--text-primary)">Mood Check-in</strong> — A quick, focused template for logging how you are feeling and what is driving it.</li>
+                <li><strong style="color:var(--text-primary)">Goal Setting</strong> — What you are working toward, what is standing in your way, and your next single action.</li>
+                <li><strong style="color:var(--text-primary)">Free Write</strong> — No prompts, no fields. A blank canvas with a minimal distraction-free layout.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">✏️</span>
+                <span class="subsection-title">Creating a custom template <span class="badge-premium">Inwardly+</span></span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span class="step-text">Go to <strong>Settings &rarr; Templates</strong>.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span class="step-text">Tap <strong>New Template</strong>.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span class="step-text">Give your template a name and add fields. Each field has a label (the question or prompt) and a text area for the answer.</span>
+                </li>
+                <li>
+                  <span class="step-num">4</span>
+                  <span class="step-text">Tap <strong>Save Template</strong>. It will now appear in the template picker when writing a new entry.</span>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🗑️</span>
+                <span class="subsection-title">Managing templates</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Go to <strong>Settings &rarr; Templates</strong> to see all your templates. From here you can edit custom templates, delete ones you no longer use, and reorder them. System templates cannot be deleted, but they can be hidden from the picker.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             8. PRIVACY & ENCRYPTION
+             ============================================================ -->
+        <section class="guide-section" id="privacy-encryption">
+          <div class="section-header">
+            <div class="section-icon-wrap">🔒</div>
+            <div class="section-title-group">
+              <div class="section-pill">Section 08</div>
+              <h2 class="section-title">Privacy &amp; Encryption</h2>
+            </div>
+          </div>
+
+          <p class="section-intro">Your journal is private by default, by design, and by architecture. Here is exactly how it works — in plain language.</p>
+
+          <div class="subsection open">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🔐</span>
+                <span class="subsection-title">How encryption works</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Every journal entry is encrypted on your device using <strong>AES-256-CTR</strong> — the same standard used to protect financial data and classified government communications — before it ever leaves your phone.</p>
+                <p>Your encryption key is generated the first time you open the app and is stored exclusively in your device's <strong>iOS Keychain</strong> — a hardware-protected secure enclave. The key never touches our servers.</p>
+                <p>What this means in practice:</p>
+              </div>
+              <ul class="bullets">
+                <li>Inwardly employees cannot read your entries — ever. Even if compelled by a court order, we do not have your key.</li>
+                <li>If our servers were ever compromised, your entries would be unreadable gibberish without your key.</li>
+                <li>Your entries are never used to train AI models — neither ours nor Anthropic's.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🛡️</span>
+                <span class="subsection-title">Setting up a recovery passphrase</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Because your encryption key is stored only on your device, if you ever reinstall the app or switch to a new iPhone, you will not be able to decrypt your existing entries without a backup of your key.</p>
+                <p>A recovery passphrase solves this. When you set one up, Inwardly wraps your encryption key with your passphrase and stores the wrapped (encrypted) version on our servers. Your passphrase is never stored — only the wrapped key is.</p>
+              </div>
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span class="step-text">Go to <strong>Settings &rarr; Data &amp; Privacy &rarr; Recovery Passphrase</strong>.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span class="step-text">Enter a strong passphrase — at least 12 characters. Do not use a common password. Write it down and keep it somewhere safe.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span class="step-text">Confirm the passphrase and tap <strong>Save</strong>.</span>
+                </li>
+              </ol>
+              <div class="callout danger">
+                <span class="callout-icon">🚨</span>
+                <div class="callout-text">
+                  <strong>Keep your passphrase safe.</strong>
+                  If you forget your recovery passphrase, your existing entries become permanently unrecoverable. We do not store your passphrase and cannot help you recover it. Write it down and store it securely.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">📱</span>
+                <span class="subsection-title">Syncing encryption key to a new device</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>If you have set up a recovery passphrase and sign into Inwardly on a new device, the app detects that you have an existing key backup and shows a recovery screen automatically.</p>
+              </div>
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span class="step-text">Sign into your account on the new device.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span class="step-text">Inwardly shows the <strong>Recovery Screen</strong>, explaining that it found an encrypted key backup for your account.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span class="step-text">Enter your recovery passphrase and tap <strong>Restore</strong>.</span>
+                </li>
+                <li>
+                  <span class="step-num">4</span>
+                  <span class="step-text">Your encryption key is restored to this device's Keychain. Your existing entries are now readable.</span>
+                </li>
+              </ol>
+              <div class="prose">
+                <p>You can also manually trigger key sync from an existing device via <strong>Settings &rarr; Data &amp; Privacy &rarr; Sync encryption key</strong>. This is useful if you use Inwardly on multiple devices simultaneously.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">👤</span>
+                <span class="subsection-title">App Lock (Face ID / Touch ID)</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>For an extra layer of physical privacy, you can require Face ID or Touch ID to open Inwardly. Enable this in <strong>Settings &rarr; Data &amp; Privacy &rarr; App Lock</strong>.</p>
+                <p>With App Lock enabled, anyone who picks up your phone cannot open your journal without your biometric — even if your phone is unlocked.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             9. PREMIUM
+             ============================================================ -->
+        <section class="guide-section" id="premium">
+          <div class="section-header">
+            <div class="section-icon-wrap">⭐</div>
+            <div class="section-title-group">
+              <div class="section-pill">Section 09</div>
+              <h2 class="section-title">Inwardly+</h2>
+            </div>
+          </div>
+
+          <p class="section-intro">Inwardly is free to start. Inwardly+ unlocks the full experience — AI insights, unlimited writing, and all premium features.</p>
+
+          <div class="subsection open">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">📊</span>
+                <span class="subsection-title">Free vs. Inwardly+ comparison</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <table class="feature-table">
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th>Free</th>
+                    <th>Inwardly+</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Journal entries per week</td>
+                    <td class="check-free">3 entries</td>
+                    <td class="check-premium">Unlimited</td>
+                  </tr>
+                  <tr>
+                    <td>Daily writing prompts</td>
+                    <td class="check-free">Static prompts</td>
+                    <td class="check-premium">AI-personalised</td>
+                  </tr>
+                  <tr>
+                    <td>Mood check-in</td>
+                    <td class="check-free">✓</td>
+                    <td class="check-premium">✓</td>
+                  </tr>
+                  <tr>
+                    <td>Streak tracking</td>
+                    <td class="check-free">✓</td>
+                    <td class="check-premium">✓</td>
+                  </tr>
+                  <tr>
+                    <td>Data export</td>
+                    <td class="check-free">✓</td>
+                    <td class="check-premium">✓</td>
+                  </tr>
+                  <tr>
+                    <td>Weekly AI reviews</td>
+                    <td class="check-no">—</td>
+                    <td class="check-premium">✓</td>
+                  </tr>
+                  <tr>
+                    <td>Emotional pattern detection</td>
+                    <td class="check-no">—</td>
+                    <td class="check-premium">✓</td>
+                  </tr>
+                  <tr>
+                    <td>Mood analytics &amp; charts</td>
+                    <td class="check-no">—</td>
+                    <td class="check-premium">✓</td>
+                  </tr>
+                  <tr>
+                    <td>Monthly emotional reports</td>
+                    <td class="check-no">—</td>
+                    <td class="check-premium">✓</td>
+                  </tr>
+                  <tr>
+                    <td>Photo attachments (up to 3/entry)</td>
+                    <td class="check-no">—</td>
+                    <td class="check-premium">✓</td>
+                  </tr>
+                  <tr>
+                    <td>Location tagging</td>
+                    <td class="check-no">—</td>
+                    <td class="check-premium">✓</td>
+                  </tr>
+                  <tr>
+                    <td>Multiple journals</td>
+                    <td class="check-no">1 journal</td>
+                    <td class="check-premium">Unlimited</td>
+                  </tr>
+                  <tr>
+                    <td>Custom templates</td>
+                    <td class="check-no">—</td>
+                    <td class="check-premium">✓</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🎁</span>
+                <span class="subsection-title">Starting the 7-day free trial</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span class="step-text">Tap any premium-gated feature, or navigate to the paywall via the Insights tab.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span class="step-text">Review the subscription options: <strong>$9.99/month</strong> or <strong>$79.99/year</strong> (save 33%).</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span class="step-text">Tap <strong>Start Free Trial</strong>. You will not be charged until the 7-day trial ends.</span>
+                </li>
+                <li>
+                  <span class="step-num">4</span>
+                  <span class="step-text">Authenticate with Face ID or your Apple ID password to confirm via the App Store.</span>
+                </li>
+              </ol>
+              <div class="callout tip">
+                <span class="callout-icon">💡</span>
+                <div class="callout-text">
+                  <strong>Cancel any time.</strong>
+                  You can cancel your subscription or trial at any time in iOS Settings &rarr; [Your Name] &rarr; Subscriptions. If you cancel before the trial ends, you will not be charged.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🔄</span>
+                <span class="subsection-title">Restoring a previous purchase</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>If you reinstall Inwardly or sign in on a new device and your premium features are not active, you can restore your purchase:</p>
+              </div>
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span class="step-text">Go to <strong>Settings &rarr; Inwardly+</strong>.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span class="step-text">Tap <strong>Restore Purchases</strong>.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span class="step-text">Your active subscription will be detected and re-applied. Make sure you are signed into the same Apple ID used to purchase.</span>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             10. SETTINGS
+             ============================================================ -->
+        <section class="guide-section" id="settings">
+          <div class="section-header">
+            <div class="section-icon-wrap">⚙️</div>
+            <div class="section-title-group">
+              <div class="section-pill">Section 10</div>
+              <h2 class="section-title">Settings</h2>
+            </div>
+          </div>
+
+          <p class="section-intro">Settings is organised into logical groups. Here is a full reference of every option and what it does.</p>
+
+          <div class="subsection open">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">👤</span>
+                <span class="subsection-title">Account</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <ul class="bullets">
+                <li><strong style="color:var(--text-primary)">Display name</strong> — The name shown in your personalised greeting on the Home screen. Tap to edit.</li>
+                <li><strong style="color:var(--text-primary)">Email address</strong> — The email associated with your account. Shown for reference.</li>
+                <li><strong style="color:var(--text-primary)">Inwardly+</strong> — Shows your current subscription status and a link to manage or restore purchases.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🔔</span>
+                <span class="subsection-title">Notifications</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <ul class="bullets">
+                <li><strong style="color:var(--text-primary)">Daily reminder</strong> — Toggle push notifications on or off. When enabled, Inwardly sends you a gentle nudge each day to write.</li>
+                <li><strong style="color:var(--text-primary)">Reminder time</strong> — Tap the time to change when your daily notification is delivered. The default is 8:00 PM.</li>
+              </ul>
+              <div class="callout tip">
+                <span class="callout-icon">💡</span>
+                <div class="callout-text">
+                  <strong>Notifications not appearing?</strong>
+                  Check that Inwardly has notification permission in iOS Settings &rarr; Notifications &rarr; Inwardly, and that Do Not Disturb is not active for that time.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🎨</span>
+                <span class="subsection-title">Appearance</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <ul class="bullets">
+                <li><strong style="color:var(--text-primary)">Theme</strong> — Choose between <strong>Light</strong>, <strong>Dark</strong>, or <strong>System</strong>. System follows your iOS appearance setting automatically.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🔒</span>
+                <span class="subsection-title">Data &amp; Privacy</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <ul class="bullets">
+                <li><strong style="color:var(--text-primary)">Your data</strong> — Informational: confirms that all entries are encrypted on-device before storage.</li>
+                <li><strong style="color:var(--text-primary)">AI training</strong> — Informational: confirms that your entries are never used to train AI models.</li>
+                <li><strong style="color:var(--text-primary)">App Lock</strong> — Toggle Face ID / Touch ID requirement to open the app.</li>
+                <li><strong style="color:var(--text-primary)">Share Analytics</strong> — Toggle whether anonymous usage analytics are sent to help improve the app. No journal content is ever included.</li>
+                <li><strong style="color:var(--text-primary)">Recovery Passphrase</strong> — Set or update your encryption key recovery passphrase.</li>
+                <li><strong style="color:var(--text-primary)">Sync encryption key</strong> — Restore your encryption key from a backup on another device (only visible when a backup exists).</li>
+                <li><strong style="color:var(--text-primary)">Export My Data</strong> — Download all your journal entries as JSON or plain text.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🚪</span>
+                <span class="subsection-title">Sign Out &amp; Delete Account</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <ul class="bullets">
+                <li><strong style="color:var(--text-primary)">Sign Out</strong> — Signs you out of your account on this device. Your encrypted entries remain on the server.</li>
+                <li><strong style="color:var(--text-primary)">Delete Account</strong> — Permanently deletes your account and all associated data from Inwardly's servers. This is a two-step confirmation and cannot be undone. Export your data first if you want a local copy.</li>
+              </ul>
+              <div class="callout danger">
+                <span class="callout-icon">🚨</span>
+                <div class="callout-text">
+                  <strong>Account deletion is permanent.</strong>
+                  Deleting your account removes all your entries, settings, and subscription data from our servers immediately. This action cannot be reversed.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             11. DATA EXPORT
+             ============================================================ -->
+        <section class="guide-section" id="data-export">
+          <div class="section-header">
+            <div class="section-icon-wrap">📤</div>
+            <div class="section-title-group">
+              <div class="section-pill">Section 11</div>
+              <h2 class="section-title">Data Export</h2>
+            </div>
+          </div>
+
+          <p class="section-intro">Your journal belongs to you. Export a complete copy of your writing at any time — no subscription required.</p>
+
+          <div class="subsection open">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">📥</span>
+                <span class="subsection-title">How to export your data</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span class="step-text">Go to <strong>Settings &rarr; Data &amp; Privacy &rarr; Export My Data</strong>.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span class="step-text">Choose your format: <strong>JSON</strong> or <strong>Plain Text</strong>.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span class="step-text">Tap <strong>Export</strong>. Inwardly decrypts your entries on-device and packages them.</span>
+                </li>
+                <li>
+                  <span class="step-num">4</span>
+                  <span class="step-text">The iOS Share Sheet appears. Save to Files, share via AirDrop, send via email, or save to any other app.</span>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">📄</span>
+                <span class="subsection-title">Export formats explained</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <ul class="bullets">
+                <li><strong style="color:var(--text-primary)">JSON format</strong> — A structured data file containing all entry metadata (date, mood, journal name, location) and full text content. Best for importing into another app, archiving to a database, or processing programmatically.</li>
+                <li><strong style="color:var(--text-primary)">Plain text format</strong> — A human-readable <code>.txt</code> file with each entry formatted chronologically, including the date, mood, and full text. Best for reading in any text editor or printing as a keepsake.</li>
+              </ul>
+              <div class="callout tip">
+                <span class="callout-icon">💡</span>
+                <div class="callout-text">
+                  <strong>What is included.</strong>
+                  The export includes every entry across all your journals: date, time, mood, location (if tagged), journal name, and full entry text. Photos are not included in text exports.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             12. TROUBLESHOOTING
+             ============================================================ -->
+        <section class="guide-section" id="troubleshooting">
+          <div class="section-header">
+            <div class="section-icon-wrap">🔧</div>
+            <div class="section-title-group">
+              <div class="section-pill">Section 12</div>
+              <h2 class="section-title">Troubleshooting</h2>
+            </div>
+          </div>
+
+          <p class="section-intro">Something not working as expected? Here are solutions to the most common issues.</p>
+
+          <div class="subsection open">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🔡</span>
+                <span class="subsection-title">My entries look like gibberish or say "encrypted"</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>This happens when Inwardly cannot find the correct encryption key on your device — most commonly after reinstalling the app or signing in on a new device.</p>
+                <p><strong>If you set up a recovery passphrase:</strong> Go to <strong>Settings &rarr; Data &amp; Privacy &rarr; Sync encryption key</strong>, enter your passphrase, and tap Restore. Your entries will be readable immediately.</p>
+                <p><strong>If you did not set up a recovery passphrase:</strong> Unfortunately, your previous entries cannot be recovered because the encryption key is gone. This is why we strongly recommend setting up a recovery passphrase as soon as you start using the app. Going forward, new entries written on this device will be readable.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🔑</span>
+                <span class="subsection-title">I forgot my recovery passphrase</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>We are very sorry — if you have lost your recovery passphrase, your encrypted entries from before the loss are permanently unrecoverable. This is by design: we never store your passphrase, which means we cannot be compelled to hand it over, but it also means we cannot help if it is forgotten.</p>
+                <p>If you still have access to your original device and the app is still installed, your encryption key may still be in the Keychain. In that case, <strong>do not uninstall the app</strong>. Set up a new recovery passphrase from that device immediately to create a new backup.</p>
+                <p>If you are already locked out, tap <strong>"Start fresh"</strong> on the recovery screen. A new encryption key is generated and you can begin writing again. Your account and any future entries are not affected.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🔥</span>
+                <span class="subsection-title">My streak reset unexpectedly</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Streaks require at least one journal entry per calendar day in your local timezone. The streak counter resets at midnight.</p>
+                <p>If you wrote an entry at 11:58 PM and another at 12:02 AM, both entries count — but the second is attributed to the new calendar day. If you wrote nothing on a specific date, that day breaks the streak.</p>
+                <p>Check the Calendar view in the Journal tab to see exactly which days had entries, which can help identify where the gap occurred.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">✨</span>
+                <span class="subsection-title">AI insights are not showing</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Pattern detection requires a minimum of <strong>10 journal entries</strong> before it activates. The Insights tab shows a progress indicator with how many entries you have written and how many are needed.</p>
+                <p>If you have more than 10 entries and insights are still not appearing, check that your Inwardly+ subscription is active (Settings &rarr; Inwardly+). If it is active and the issue persists, try pulling down to refresh the Insights tab, or contact support.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🔔</span>
+                <span class="subsection-title">Notifications are not arriving</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>If your daily reminder is not appearing, work through this checklist:</p>
+              </div>
+              <ol class="steps">
+                <li>
+                  <span class="step-num">1</span>
+                  <span class="step-text">Open <strong>iOS Settings &rarr; Notifications &rarr; Inwardly</strong> and confirm that "Allow Notifications" is turned on.</span>
+                </li>
+                <li>
+                  <span class="step-num">2</span>
+                  <span class="step-text">In Inwardly Settings, confirm that Daily Reminder is toggled on and the time is set correctly.</span>
+                </li>
+                <li>
+                  <span class="step-num">3</span>
+                  <span class="step-text">Check that <strong>Focus / Do Not Disturb</strong> is not blocking notifications at your chosen reminder time.</span>
+                </li>
+                <li>
+                  <span class="step-num">4</span>
+                  <span class="step-text">If the issue persists, toggle the Daily Reminder off and back on in Inwardly Settings. This re-schedules the notification.</span>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">🔐</span>
+                <span class="subsection-title">Can't sign in with Google</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>Google sign-in requires an internet connection and an active Google account. Try the following:</p>
+              </div>
+              <ul class="bullets">
+                <li>Check that you have an active internet connection (Wi-Fi or cellular).</li>
+                <li>Try closing and reopening the app, then attempting sign-in again.</li>
+                <li>If Google sign-in still fails, use your email and password as an alternative, or sign in with Apple.</li>
+                <li>Contact support at <a href="mailto:support@goinwardly.app" style="color:var(--indigo-light);text-decoration:underline;">support@goinwardly.app</a> if the issue persists.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-toggle">
+              <div class="subsection-toggle-left">
+                <span class="subsection-toggle-icon">📧</span>
+                <span class="subsection-title">Still need help? Contact support</span>
+              </div>
+              <span class="subsection-chevron">&#9660;</span>
+            </div>
+            <div class="subsection-body">
+              <div class="prose">
+                <p>We are a small team and we read every support email personally. If you are running into something not covered in this guide, reach out and we will get back to you as quickly as we can.</p>
+                <p>Email: <a href="mailto:support@goinwardly.app" style="color:var(--indigo-light);text-decoration:underline;font-weight:500;">support@goinwardly.app</a></p>
+                <p>When contacting support, it helps to include:</p>
+              </div>
+              <ul class="bullets">
+                <li>Your iOS version and iPhone model</li>
+                <li>A description of what you were trying to do when the issue occurred</li>
+                <li>Whether you are on the free tier or Inwardly+</li>
+              </ul>
+              <div class="callout tip">
+                <span class="callout-icon">💡</span>
+                <div class="callout-text">
+                  <strong>Please do not include journal entry content in support emails.</strong>
+                  We never need to read your entries to help you — and we respect the privacy of your writing deeply.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="divider"></div>
+        <div style="text-align:center; padding: 32px 0 0;">
+          <img src="../app-icon.png" alt="Inwardly" style="width:40px;height:40px;border-radius:10px;margin-bottom:14px;box-shadow:0 4px 20px rgba(91,74,138,0.40);">
+          <p style="font-family:'Playfair Display',Georgia,serif;font-size:18px;color:var(--text-primary);margin-bottom:6px;">inwardly</p>
+          <p style="font-size:13px;color:var(--text-tertiary);margin-bottom:20px;">Your thoughts, understood.</p>
+          <div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;">
+            <a href="../" style="font-size:13px;color:var(--text-tertiary);transition:color 0.2s;" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='var(--text-tertiary)'">Home</a>
+            <a href="../privacy/" style="font-size:13px;color:var(--text-tertiary);transition:color 0.2s;" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='var(--text-tertiary)'">Privacy Policy</a>
+            <a href="../terms/" style="font-size:13px;color:var(--text-tertiary);transition:color 0.2s;" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='var(--text-tertiary)'">Terms of Service</a>
+            <a href="mailto:support@goinwardly.app" style="font-size:13px;color:var(--text-tertiary);transition:color 0.2s;" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='var(--text-tertiary)'">Support</a>
+          </div>
+          <p style="font-size:12px;color:var(--text-tertiary);margin-top:24px;opacity:0.6;">&copy; 2026 Inwardly. All rights reserved.</p>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Back to top -->
+  <a href="#" class="back-to-top" id="back-to-top" aria-label="Back to top">&#8593;</a>
+
+  <script>
+    // ===================================================================
+    // Accordion — toggle subsections
+    // ===================================================================
+    document.querySelectorAll('.subsection-toggle').forEach(function(toggle) {
+      toggle.addEventListener('click', function() {
+        var subsection = this.closest('.subsection');
+        subsection.classList.toggle('open');
+      });
+    });
+
+    // ===================================================================
+    // Sidebar — hamburger toggle (mobile)
+    // ===================================================================
+    var hamburger = document.getElementById('hamburger');
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('sidebar-overlay');
+
+    function openSidebar() {
+      sidebar.classList.add('mobile-open');
+      overlay.classList.add('visible');
+      hamburger.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('mobile-open');
+      overlay.classList.remove('visible');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', function() {
+      if (sidebar.classList.contains('mobile-open')) {
+        closeSidebar();
+      } else {
+        openSidebar();
+      }
+    });
+
+    overlay.addEventListener('click', closeSidebar);
+
+    // Close sidebar when a nav link is clicked on mobile
+    sidebar.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        if (window.innerWidth <= 900) {
+          closeSidebar();
+        }
+      });
+    });
+
+    // ===================================================================
+    // Active section — IntersectionObserver
+    // ===================================================================
+    var sidebarItems = document.querySelectorAll('.sidebar-item[data-section]');
+
+    function setActive(sectionId) {
+      sidebarItems.forEach(function(item) {
+        if (item.dataset.section === sectionId) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+
+    var sections = document.querySelectorAll('.guide-section[id]');
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
+        }
+      });
+    }, {
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    });
+
+    sections.forEach(function(section) {
+      observer.observe(section);
+    });
+
+    // Set first section active on load
+    if (sections.length > 0) {
+      setActive(sections[0].id);
+    }
+
+    // ===================================================================
+    // Back to top button
+    // ===================================================================
+    var backToTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 400) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    backToTop.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>
