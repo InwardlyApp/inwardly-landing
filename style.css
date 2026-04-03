@@ -210,6 +210,21 @@ a {
   color: var(--text-primary);
 }
 
+.nav-link-guide {
+  color: var(--gold) !important;
+  border: 1px solid rgba(212, 168, 84, 0.25);
+  background: rgba(212, 168, 84, 0.08);
+  border-radius: 100px;
+  padding: 4px 14px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.nav-link-guide:hover {
+  background: rgba(212, 168, 84, 0.15) !important;
+  border-color: rgba(212, 168, 84, 0.45) !important;
+  color: var(--gold) !important;
+}
+
 /* ===================================================================
    Hero
    =================================================================== */
