@@ -257,7 +257,8 @@
       padding-top: var(--topbar-height);
       min-height: 100vh;
       position: relative;
-      z-index: 1;
+      /* No z-index here — setting one would create a stacking context that traps
+         the sidebar's z-index inside it, making the root-level overlay win on iOS. */
     }
 
     /* ===================================================================
@@ -363,10 +364,10 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.55);
       z-index: 250;
-      backdrop-filter: blur(2px);
-      -webkit-backdrop-filter: blur(2px);
+      /* No backdrop-filter: iOS Safari bug — blur layers intercept touch events
+         even when a higher z-index element is visually on top. */
     }
     .sidebar-overlay.visible { display: block; }
 
