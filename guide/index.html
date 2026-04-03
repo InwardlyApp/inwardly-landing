@@ -235,7 +235,7 @@
       padding: 4px;
       background: none;
       border: none;
-      z-index: 300;
+      z-index: 400;
     }
     .hamburger span {
       display: block;
@@ -364,8 +364,9 @@
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.5);
-      z-index: 99;
+      z-index: 250;
       backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
     }
     .sidebar-overlay.visible { display: block; }
 
@@ -839,11 +840,13 @@
     @media (max-width: 900px) {
       .sidebar {
         transform: translateX(-100%);
-        z-index: 200;
+        z-index: 300;
+        pointer-events: none;
       }
 
       .sidebar.mobile-open {
         transform: translateX(0);
+        pointer-events: auto;
       }
 
       .main {
@@ -2783,18 +2786,28 @@
     var sidebar = document.getElementById('sidebar');
     var overlay = document.getElementById('sidebar-overlay');
 
+    // iOS Safari bug: body.overflow='hidden' breaks touch events on position:fixed
+    // elements. Use scroll-position locking via body position:fixed instead.
+    var _scrollY = 0;
+
     function openSidebar() {
+      _scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = '-' + _scrollY + 'px';
+      document.body.style.width = '100%';
       sidebar.classList.add('mobile-open');
       overlay.classList.add('visible');
       hamburger.classList.add('open');
-      document.body.style.overflow = 'hidden';
     }
 
     function closeSidebar() {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, _scrollY);
       sidebar.classList.remove('mobile-open');
       overlay.classList.remove('visible');
       hamburger.classList.remove('open');
-      document.body.style.overflow = '';
     }
 
     hamburger.addEventListener('click', function() {
